@@ -62,7 +62,8 @@ def initialize_missing_dates(df):
                 new_rows.append({'Full_Date': date, 'Study': subject, 'Hours': 0})
 
     if new_rows:
-        df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
+        new_df = pd.DataFrame(new_rows)
+        df = pd.concat([df, new_df], ignore_index=True)
 
     return df
 
@@ -87,7 +88,8 @@ st.write("Add Study Hours")
 new_entry = input_study_hours()
 
 if new_entry:
-    df = df.append(new_entry, ignore_index=True)
+    new_df = pd.DataFrame([new_entry])
+    df = pd.concat([df, new_df], ignore_index=True)
     st.success("New study hours added!")
 
 # Button to save changes back to GitHub
