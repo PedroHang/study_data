@@ -43,6 +43,9 @@ if not df.empty:
     df_daily['Week'] = df_daily['Full_Date'].dt.to_period('W').apply(lambda r: r.start_time)  # Get the start date of the week
     df_weekly = df_daily.groupby('Week')['Hours'].mean().reset_index()
 
+    # Format the average hours to 2 decimal points
+    df_weekly['Hours'] = df_weekly['Hours'].round(2)
+
     # Check if df_daily is not empty before plotting
     if not df_daily.empty:
         # Toggle between Total Hours, Rolling Volatility, and Weekly Average
@@ -91,7 +94,7 @@ if not df.empty:
             fig_weekly = px.bar(df_weekly, x='Week', y='Hours',
                                  title='Weekly Average Study Hours',
                                  labels={'Week': 'Week Start Date', 'Hours': 'Average Hours'},
-                                 text='Hours',  # Display average hours on the bars
+                                 text=df_weekly['Hours'].apply(lambda x: f"{x:.2f}"),  # Format text to 2 decimal points
                                  color='Hours',  # Color by average hours
                                  color_continuous_scale=px.colors.sequential.Viridis)  # Color scale
 
