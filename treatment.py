@@ -38,22 +38,32 @@ if not df.empty:
     # Calculate the 7-day rolling standard deviation
     df_daily['Rolling Volatility'] = df_daily['Hours'].rolling(window=7).std()
 
-    # Calculate the weekly average starting from Monday
+    # Format the 'Full_Date' column to datetime
     df_daily['Full_Date'] = pd.to_datetime(df_daily['Full_Date'])
-    df_daily['Week'] = df_daily['Full_Date'].dt.to_period('W').apply(lambda r: r.start_time)  # Get the start date of the week
-    df_weekly = df_daily.groupby('Week')['Hours'].mean().reset_index()
+
+    # Date range selector
+    start_date, end_date = st.date_input("Select date range:",
+                                          [df_daily['Full_Date'].min(), df_daily['Full_Date'].max()])
+
+    # Filter the DataFrame for the selected date range
+    df_filtered = df_daily[(df_daily['Full_Date'] >= pd.Timestamp(start_date)) &
+                           (df_daily['Full_Date'] <= pd.Timestamp(end_date))]
+
+    # Calculate the weekly average starting from Monday
+    df_filtered['Week'] = df_filtered['Full_Date'].dt.to_period('W').apply(lambda r: r.start_time)  # Get the start date of the week
+    df_weekly = df_filtered.groupby('Week')['Hours'].mean().reset_index()
 
     # Format the average hours to 2 decimal points
     df_weekly['Hours'] = df_weekly['Hours'].round(2)
 
-    # Check if df_daily is not empty before plotting
-    if not df_daily.empty:
+    # Check if df_filtered is not empty before plotting
+    if not df_filtered.empty:
         # Toggle between Total Hours, Rolling Volatility, and Weekly Average
         plot_option = st.selectbox("Select Plot Type:", ("Total Hours", "Rolling Volatility", "Weekly Average"))
 
         if plot_option == "Total Hours":
             # Create a Plotly line chart for total hours per day
-            fig = px.line(df_daily, x='Full_Date', y='Hours', 
+            fig = px.line(df_filtered, x='Full_Date', y='Hours', 
                           title='Total Hours Per Day',
                           labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
                           markers=True)
@@ -72,7 +82,7 @@ if not df.empty:
 
         elif plot_option == "Rolling Volatility":
             # Create a Plotly line chart for rolling volatility
-            fig_volatility = px.line(df_daily, x='Full_Date', y='Rolling Volatility',
+            fig_volatility = px.line(df_filtered, x='Full_Date', y='Rolling Volatility',
                                      title='7-Day Rolling Volatility',
                                      labels={'Full_Date': 'Date', 'Rolling Volatility': 'Volatility'},
                                      markers=True)
@@ -124,8 +134,13 @@ if not df.empty:
 
     # Check if df_study is not empty before plotting
     if not df_study.empty:
+        # Filter the subject data by selected date range
+        df_study_filtered = df[df['Full_Date'].between(start_date, end_date)]
+        df_study_summary = df_study_filtered.groupby("Study")['Hours'].sum().reset_index()
+        df_study_summary = df_study_summary.sort_values(by='Hours', ascending=False)
+
         # Create a Plotly bar chart for total hours by study with a color palette
-        fig_study = px.bar(df_study, x='Study', y='Hours', 
+        fig_study = px.bar(df_study_summary, x='Study', y='Hours', 
                            title='Total Hours by Study',
                            labels={'Study': 'Study', 'Hours': 'Total Hours'},
                            text='Hours',  # Display hours on the bars
