@@ -15,7 +15,7 @@ def load_data():
 # Function to update the CSV file on GitHub
 def update_csv(df):
     url = "https://api.github.com/repos/PedroHang/study_data/contents/clean_data.csv"
-    token = st.secrets["GITHUB_TOKEN"]  # Store your GitHub token in Streamlit secrets
+    token = st.secrets["GITHUB_TOKEN"]
     message = "Update study hours"
     content = df.to_csv(index=False).encode("utf-8")
     
@@ -23,7 +23,7 @@ def update_csv(df):
     response = requests.get(url, headers={"Authorization": f"token {token}"})
     
     if response.status_code != 200:
-        print("Failed to get the file: ", response.json())
+        st.error("Failed to get the file: " + response.json().get('message', ''))
         return False
 
     sha = response.json()["sha"]
@@ -39,11 +39,12 @@ def update_csv(df):
     response = requests.put(url, headers={"Authorization": f"token {token}"}, json=payload)
 
     if response.ok:
-        print("File updated successfully.")
+        st.success("File updated successfully.")
     else:
-        print("Failed to update the file: ", response.json())
+        st.error(f"Failed to update the file: {response.status_code} - {response.text}")
 
     return response.ok
+
 
 # Load the data
 df = load_data()
