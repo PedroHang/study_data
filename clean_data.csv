@@ -1,0 +1,1318 @@
+Study,Date,Hours
+Leitura,5/12,1.5
+Japanese,5/12,0
+AWS,5/12,2
+Faculdade,5/12,0
+Other,5/12,0
+Leitura,5/13,1
+Japanese,5/13,1
+AWS,5/13,1.5
+Faculdade,5/13,2
+Other,5/13,1
+Leitura,5/14,0
+Japanese,5/14,1.5
+AWS,5/14,2.5
+Faculdade,5/14,0
+Other,5/14,0.5
+Leitura,5/15,1.25
+Japanese,5/15,1
+AWS,5/15,2
+Faculdade,5/15,2
+Other,5/15,1.25
+Leitura,5/16,0.5
+Japanese,5/16,1
+AWS,5/16,3.5
+Faculdade,5/16,1.5
+Other,5/16,0
+Leitura,5/17,1
+Japanese,5/17,0
+AWS,5/17,1.5
+Faculdade,5/17,2
+Other,5/17,1.5
+Leitura,5/18,0
+Japanese,5/18,0
+AWS,5/18,0
+Faculdade,5/18,2
+Other,5/18,1.5
+Leitura,5/19,0
+Japanese,5/19,0
+AWS,5/19,0
+Faculdade,5/19,0
+Other,5/19,0
+Leitura,5/20,0
+Japanese,5/20,0.5
+AWS,5/20,0
+Faculdade,5/20,3
+Other,5/20,2.25
+Leitura,5/21,0.75
+Japanese,5/21,0.8
+AWS,5/21,2.75
+Faculdade,5/21,2
+Other,5/21,0
+Leitura,5/22,1
+Japanese,5/22,0.9
+AWS,5/22,0.2
+Faculdade,5/22,2.75
+Other,5/22,0
+Leitura,5/23,0
+Japanese,5/23,0.5
+Python,5/23,1.2
+AWS,5/23,2.25
+Faculdade,5/23,2
+Other,5/23,0
+Leitura,5/24,0
+Japanese,5/24,0.1
+Python,5/24,0
+AWS,5/24,2
+Faculdade,5/24,2.75
+Other,5/24,0
+Data Science,5/25,0.25
+Leitura,5/25,0
+Japanese,5/25,0
+SQL,5/25,2
+Python,5/25,0
+AWS,5/25,0
+Faculdade,5/25,1.5
+Other,5/25,0
+Soft Skills,5/25,0.25
+Data Science,5/26,0
+Leitura,5/26,0
+Japanese,5/26,0
+SQL,5/26,2
+Python,5/26,0
+AWS,5/26,0
+Faculdade,5/26,0
+Other,5/26,0
+Soft Skills,5/26,0
+Data Science,5/27,4.4
+Leitura,5/27,0
+Japanese,5/27,0.5
+SQL,5/27,0
+Python,5/27,0
+AWS,5/27,2.85
+Faculdade,5/27,0
+Other,5/27,0
+Soft Skills,5/27,0
+Data Science,5/28,3
+Leitura,5/28,0
+Japanese,5/28,0.25
+SQL,5/28,0
+Python,5/28,0
+AWS,5/28,2.5
+Faculdade,5/28,0
+Other,5/28,0
+Soft Skills,5/28,0
+Data Science,5/29,6.25
+Leitura,5/29,0
+Japanese,5/29,0
+SQL,5/29,0
+Python,5/29,0
+AWS,5/29,2.75
+Faculdade,5/29,0
+Other,5/29,0
+Soft Skills,5/29,0
+Data Science,5/30,3.7
+Leitura,5/30,0
+Japanese,5/30,0
+SQL,5/30,0
+Python,5/30,0
+AWS,5/30,0
+Faculdade,5/30,0
+Other,5/30,0
+Soft Skills,5/30,0
+Data Science,5/31,2.5
+Leitura,5/31,0
+Japanese,5/31,0
+SQL,5/31,0
+Python,5/31,0
+AWS,5/31,2.75
+Faculdade,5/31,0
+Other,5/31,0
+Soft Skills,5/31,0
+Data Science,6/1,2.25
+Leitura,6/1,0
+Japanese,6/1,0
+SQL,6/1,0
+Python,6/1,0
+AWS,6/1,2.3
+Faculdade,6/1,0
+Other,6/1,0
+Soft Skills,6/1,0
+Data Science,6/2,1.5
+Leitura,6/2,0
+Japanese,6/2,0
+SQL,6/2,0
+Python,6/2,0
+AWS,6/2,2.5
+Faculdade,6/2,0
+Other,6/2,0
+Soft Skills,6/2,0
+Data Science,6/3,4
+Leitura,6/3,0
+Japanese,6/3,0
+SQL,6/3,0
+Python,6/3,0
+AWS,6/3,1.75
+Faculdade,6/3,0
+Other,6/3,0
+Soft Skills,6/3,0
+Data Science,6/4,5
+Leitura,6/4,0
+Japanese,6/4,0.1
+SQL,6/4,0
+Python,6/4,0
+AWS,6/4,1
+Faculdade,6/4,1.5
+Other,6/4,0
+Soft Skills,6/4,0
+Data Science,6/5,1.3
+Leitura,6/5,0.5
+Japanese,6/5,0
+SQL,6/5,0
+Python,6/5,0
+AWS,6/5,1.1
+Faculdade,6/5,1.5
+Other,6/5,0
+Soft Skills,6/5,0
+Data Science,6/6,0.5
+Leitura,6/6,0.4
+Japanese,6/6,0
+SQL,6/6,0
+Python,6/6,0
+AWS,6/6,0.85
+Faculdade,6/6,0.8
+Other,6/6,0
+Soft Skills,6/6,0
+Data Science,6/7,5.25
+Leitura,6/7,0.1
+Japanese,6/7,0
+SQL,6/7,0
+Python,6/7,0
+AWS,6/7,1
+Faculdade,6/7,0
+Other,6/7,0
+Soft Skills,6/7,0
+Data Science,6/8,3.25
+Leitura,6/8,0
+Japanese,6/8,0
+SQL,6/8,0.5
+Python,6/8,0
+AWS,6/8,0
+Faculdade,6/8,0
+Other,6/8,0
+Soft Skills,6/8,0
+Data Science,6/9,0.75
+Leitura,6/9,0.5
+Japanese,6/9,0.63
+SQL,6/9,2.3
+Python,6/9,0
+AWS,6/9,0
+Faculdade,6/9,0
+Other,6/9,0
+Soft Skills,6/9,0
+Data Science,6/10,0
+Leitura,6/10,0
+Japanese,6/10,0
+SQL,6/10,0.5
+Python,6/10,0
+AWS,6/10,1
+Faculdade,6/10,0
+Other,6/10,0
+Soft Skills,6/10,0
+Data Science,6/11,1.2
+Leitura,6/11,0
+Japanese,6/11,0
+SQL,6/11,0.25
+Python,6/11,0
+AWS,6/11,2.5
+Faculdade,6/11,0
+Other,6/11,0
+Soft Skills,6/11,0
+Data Science,6/12,0
+Leitura,6/12,0
+Japanese,6/12,0
+SQL,6/12,0
+Python,6/12,0
+AWS,6/12,2.75
+Faculdade,6/12,1.33
+Other,6/12,0
+Soft Skills,6/12,0
+Data Science,6/13,0.75
+Leitura,6/13,0
+Japanese,6/13,0
+SQL,6/13,0.5
+Python,6/13,0.75
+AWS,6/13,0.5
+Faculdade,6/13,4
+Other,6/13,0
+Soft Skills,6/13,0
+Data Science,6/14,0
+Leitura,6/14,0.32
+Japanese,6/14,0
+SQL,6/14,0
+Python,6/14,0
+AWS,6/14,0
+Faculdade,6/14,4.86
+Other,6/14,0
+Soft Skills,6/14,0
+Data Science,6/15,0
+Leitura,6/15,0.33
+Japanese,6/15,0
+SQL,6/15,0
+Python,6/15,0
+AWS,6/15,0
+Faculdade,6/15,2.75
+Other,6/15,0
+Soft Skills,6/15,0
+Data Science,6/16,0
+Leitura,6/16,0
+Japanese,6/16,0
+SQL,6/16,0
+Python,6/16,0
+AWS,6/16,0
+Faculdade,6/16,0
+Other,6/16,0
+Soft Skills,6/16,0
+Data Science,6/17,0
+Leitura,6/17,0
+Japanese,6/17,0
+SQL,6/17,1.3
+Python,6/17,0.25
+AWS,6/17,3.5
+Faculdade,6/17,0
+Other,6/17,0
+Soft Skills,6/17,0
+Data Science,6/18,0
+Leitura,6/18,0.2
+Japanese,6/18,0
+SQL,6/18,0
+Python,6/18,0
+AWS,6/18,2.5
+Faculdade,6/18,0
+Other,6/18,0
+Soft Skills,6/18,0
+Data Science,6/19,0
+Leitura,6/19,0.5
+Japanese,6/19,0
+SQL,6/19,0
+Python,6/19,0
+AWS,6/19,4.5
+Faculdade,6/19,0
+Other,6/19,0
+Soft Skills,6/19,0
+Data Science,6/20,0
+Leitura,6/20,0
+Japanese,6/20,0
+SQL,6/20,0
+Python,6/20,0
+AWS,6/20,5
+Faculdade,6/20,0
+Other,6/20,0
+Soft Skills,6/20,0
+Data Science,6/21,0
+Leitura,6/21,0
+Japanese,6/21,0
+SQL,6/21,0
+Python,6/21,0
+AWS,6/21,0.5
+Faculdade,6/21,0
+Other,6/21,0
+Soft Skills,6/21,0
+Data Science,6/22,0
+Leitura,6/22,0
+Japanese,6/22,0
+SQL,6/22,0
+Python,6/22,0
+Faculdade,6/22,2
+Other,6/22,0
+Soft Skills,6/22,0
+Data Science,6/23,0
+Leitura,6/23,0
+Japanese,6/23,0
+SQL,6/23,0
+Python,6/23,0
+Faculdade,6/23,0
+Other,6/23,0
+Soft Skills,6/23,0
+Data Science,6/24,1.5
+Leitura,6/24,0.5
+Japanese,6/24,0
+SQL,6/24,0
+Python,6/24,0
+Faculdade,6/24,0
+Other,6/24,0
+Soft Skills,6/24,0
+Data Science,6/25,2.5
+Leitura,6/25,0.25
+Japanese,6/25,0
+SQL,6/25,0
+Python,6/25,0
+Faculdade,6/25,0
+Other,6/25,0
+Soft Skills,6/25,0
+Data Science,6/26,4
+Leitura,6/26,0
+Japanese,6/26,0
+SQL,6/26,0.5
+Python,6/26,0
+Faculdade,6/26,0
+Other,6/26,0
+Soft Skills,6/26,0
+Data Science,6/27,4.25
+Leitura,6/27,0.33
+Japanese,6/27,0
+SQL,6/27,0.2
+Python,6/27,0
+Faculdade,6/27,0
+Other,6/27,0
+Soft Skills,6/27,0
+Data Science,6/28,1.75
+Leitura,6/28,0.4
+Japanese,6/28,0
+SQL,6/28,0
+Python,6/28,0
+Faculdade,6/28,0
+Other,6/28,0
+Soft Skills,6/28,0
+Data Science,6/29,0
+Leitura,6/29,0
+Japanese,6/29,0
+SQL,6/29,0
+Python,6/29,0
+Faculdade,6/29,0
+Other,6/29,0
+Soft Skills,6/29,0
+Data Science,6/30,0
+Leitura,6/30,1.5
+Japanese,6/30,0
+SQL,6/30,0
+Python,6/30,0
+Faculdade,6/30,0
+Other,6/30,0
+Soft Skills,6/30,0
+Data Science,7/1,1.5
+Leitura,7/1,0
+Japanese,7/1,0
+SQL,7/1,0.75
+Python,7/1,0
+Faculdade,7/1,0
+Other,7/1,0.9
+Soft Skills,7/1,0
+Data Science,7/2,4.8
+Leitura,7/2,0
+Japanese,7/2,0.5
+SQL,7/2,0
+Python,7/2,0
+Faculdade,7/2,0
+Other,7/2,0
+Soft Skills,7/2,0
+Data Science,7/3,5.25
+Leitura,7/3,0.4
+Japanese,7/3,0
+SQL,7/3,0
+Python,7/3,0
+Faculdade,7/3,0
+Other,7/3,0
+Soft Skills,7/3,0
+Data Science,7/4,3.33
+Leitura,7/4,1.15
+Japanese,7/4,0
+SQL,7/4,0.55
+Python,7/4,0
+Faculdade,7/4,0
+Other,7/4,0
+Soft Skills,7/4,0
+Data Science,7/5,1.63
+Leitura,7/5,0.33
+Japanese,7/5,0
+SQL,7/5,1.25
+Python,7/5,0
+Faculdade,7/5,0
+Other,7/5,0
+Soft Skills,7/5,0
+Data Science,7/6,2.08
+Leitura,7/6,0
+Japanese,7/6,0
+SQL,7/6,0
+Python,7/6,0
+Faculdade,7/6,0
+Other,7/6,0
+Soft Skills,7/6,0
+Data Science,7/7,4.85
+Leitura,7/7,0
+Japanese,7/7,0
+SQL,7/7,0
+Python,7/7,0
+Faculdade,7/7,0
+Other,7/7,0
+Soft Skills,7/7,0
+Data Science,7/8,1.28
+Leitura,7/8,0.2
+Japanese,7/8,0
+SQL,7/8,0
+Python,7/8,0
+Faculdade,7/8,0
+Other,7/8,3.2
+Soft Skills,7/8,0
+Data Science,7/9,2.85
+Leitura,7/9,0
+Japanese,7/9,0
+SQL,7/9,0.75
+Python,7/9,0
+Faculdade,7/9,0
+Other,7/9,0
+Soft Skills,7/9,0
+Data Science,7/10,5.23
+Leitura,7/10,0.33
+Japanese,7/10,0
+SQL,7/10,1
+Python,7/10,0
+Faculdade,7/10,0
+Other,7/10,0
+Soft Skills,7/10,0
+Data Science,7/11,4.92
+Leitura,7/11,0.4
+Japanese,7/11,0
+SQL,7/11,0
+Python,7/11,0
+Faculdade,7/11,0
+Other,7/11,0
+Soft Skills,7/11,0
+Data Science,7/12,5
+Leitura,7/12,0
+Japanese,7/12,0
+SQL,7/12,0
+Python,7/12,0
+Faculdade,7/12,0
+Other,7/12,0
+Soft Skills,7/12,0
+Data Science,7/13,1.6
+Leitura,7/13,0.25
+Japanese,7/13,0
+SQL,7/13,0
+Python,7/13,0
+Faculdade,7/13,0
+Other,7/13,0
+Soft Skills,7/13,0
+Data Science,7/14,4.89
+Leitura,7/14,0
+Japanese,7/14,0
+SQL,7/14,0
+Python,7/14,0
+Faculdade,7/14,0
+Other,7/14,0
+Soft Skills,7/14,0
+Data Science,7/15,5.72
+Leitura,7/15,0
+Japanese,7/15,0
+SQL,7/15,0
+Python,7/15,0
+Faculdade,7/15,0
+Other,7/15,0.75
+Soft Skills,7/15,0
+Data Science,7/16,2.92
+Leitura,7/16,0
+Japanese,7/16,0
+SQL,7/16,0
+Python,7/16,0
+Faculdade,7/16,0
+Other,7/16,3.5
+Soft Skills,7/16,0
+Data Science,7/17,2.25
+Leitura,7/17,0
+Japanese,7/17,0
+SQL,7/17,0
+Python,7/17,0
+Faculdade,7/17,0
+Other,7/17,2.25
+Soft Skills,7/17,0
+Data Science,7/18,2.25
+Leitura,7/18,0
+Japanese,7/18,0
+SQL,7/18,0
+Python,7/18,0
+Faculdade,7/18,0
+Other,7/18,3.17
+Soft Skills,7/18,0
+Data Science,7/19,1
+Leitura,7/19,0
+Japanese,7/19,0
+SQL,7/19,0.26
+Python,7/19,0
+Faculdade,7/19,0
+Other,7/19,3
+Soft Skills,7/19,0
+Data Science,7/20,0
+Leitura,7/20,0.5
+Japanese,7/20,0
+SQL,7/20,2.5
+Python,7/20,0
+Faculdade,7/20,0
+Other,7/20,0
+Soft Skills,7/20,0
+Data Science,7/21,0.5
+Leitura,7/21,0
+Japanese,7/21,0
+SQL,7/21,2
+Python,7/21,0
+Faculdade,7/21,0
+Other,7/21,0
+Soft Skills,7/21,0
+Data Science,7/22,3.42
+Leitura,7/22,0
+Japanese,7/22,0
+SQL,7/22,0
+Python,7/22,0
+Faculdade,7/22,0
+Other,7/22,2.75
+Soft Skills,7/22,0
+Data Science,7/23,1.78
+Leitura,7/23,0.92
+Japanese,7/23,0
+SQL,7/23,0
+Python,7/23,0
+Faculdade,7/23,0
+Other,7/23,0.75
+Soft Skills,7/23,0
+Data Science,7/24,5.05
+Leitura,7/24,0
+Japanese,7/24,0
+SQL,7/24,0
+Python,7/24,0
+Faculdade,7/24,0
+Other,7/24,0
+Soft Skills,7/24,0
+Data Science,7/25,4.75
+Leitura,7/25,0
+Japanese,7/25,0
+SQL,7/25,0
+Python,7/25,0
+Faculdade,7/25,0
+Other,7/25,0
+Soft Skills,7/25,0
+Data Science,7/26,3
+Leitura,7/26,0
+Japanese,7/26,0
+SQL,7/26,0
+Python,7/26,0
+Faculdade,7/26,0
+Other,7/26,0
+Soft Skills,7/26,0
+Data Science,7/27,1.1
+Leitura,7/27,0
+Japanese,7/27,0
+SQL,7/27,0
+Python,7/27,0
+Faculdade,7/27,0
+Other,7/27,0
+Soft Skills,7/27,0
+Data Science,7/28,2.83
+Leitura,7/28,0
+Japanese,7/28,0
+SQL,7/28,0
+Python,7/28,0
+Faculdade,7/28,0
+Other,7/28,0.4
+Soft Skills,7/28,0
+Data Science,7/29,2
+Leitura,7/29,0
+Japanese,7/29,0
+SQL,7/29,0
+Python,7/29,0
+Faculdade,7/29,1
+Other,7/29,3.1
+Soft Skills,7/29,0
+Data Science,7/30,2.15
+Leitura,7/30,0.25
+Japanese,7/30,0
+SQL,7/30,0
+Python,7/30,0
+Faculdade,7/30,0.6
+Other,7/30,0
+Soft Skills,7/30,0
+Data Science,7/31,3.92
+Leitura,7/31,0
+Japanese,7/31,0
+SQL,7/31,0
+Python,7/31,0
+Faculdade,7/31,0
+Other,7/31,0.65
+Soft Skills,7/31,0
+Data Science,8/1,1.45
+Leitura,8/1,0
+Japanese,8/1,0
+SQL,8/1,0
+Python,8/1,0
+Faculdade,8/1,1.9
+Other,8/1,1
+Soft Skills,8/1,0
+PowerBI,8/1,0.75
+Data Science,8/2,2.25
+Leitura,8/2,0
+Japanese,8/2,0
+SQL,8/2,0
+Python,8/2,0
+Faculdade,8/2,1.5
+Other,8/2,0
+Soft Skills,8/2,0
+PowerBI,8/2,0
+Data Science,8/3,5.27
+Leitura,8/3,0
+Japanese,8/3,0
+SQL,8/3,0
+Python,8/3,0
+Faculdade,8/3,0
+Other,8/3,0
+Soft Skills,8/3,0
+PowerBI,8/3,0
+Data Science,8/4,1
+Leitura,8/4,0.5
+Japanese,8/4,0
+SQL,8/4,0
+Python,8/4,0
+Faculdade,8/4,0
+Other,8/4,0
+Soft Skills,8/4,0
+PowerBI,8/4,1
+Data Science,8/5,2.63
+Leitura,8/5,0.25
+Japanese,8/5,0
+SQL,8/5,0
+Python,8/5,0
+Faculdade,8/5,1.83
+Other,8/5,0.58
+Soft Skills,8/5,0
+PowerBI,8/5,0
+Data Science,8/6,3.75
+Leitura,8/6,0.25
+Japanese,8/6,0
+SQL,8/6,0
+Python,8/6,0
+Faculdade,8/6,1
+Other,8/6,0.5
+Soft Skills,8/6,0
+PowerBI,8/6,0
+Data Science,8/7,2.3
+Leitura,8/7,0.4
+Japanese,8/7,0
+SQL,8/7,0
+Python,8/7,0
+Faculdade,8/7,0.5
+Other,8/7,1.25
+Soft Skills,8/7,0
+PowerBI,8/7,0
+Data Science,8/8,4.92
+Leitura,8/8,0.35
+Japanese,8/8,0
+SQL,8/8,0
+Python,8/8,0
+Faculdade,8/8,1.25
+Other,8/8,0
+Soft Skills,8/8,0
+PowerBI,8/8,0
+Data Science,8/9,2.57
+Leitura,8/9,0
+Japanese,8/9,0
+SQL,8/9,0
+Python,8/9,0
+Faculdade,8/9,0.52
+Other,8/9,1.25
+Soft Skills,8/9,0
+PowerBI,8/9,0
+Data Science,8/10,2.17
+Leitura,8/10,0
+Japanese,8/10,0
+SQL,8/10,0
+Python,8/10,0
+Faculdade,8/10,0
+Other,8/10,2.75
+Soft Skills,8/10,0
+PowerBI,8/10,0
+Data Science,8/11,1.9
+Leitura,8/11,0.35
+Japanese,8/11,0
+SQL,8/11,0
+Python,8/11,0
+Faculdade,8/11,0
+Other,8/11,0.5
+Soft Skills,8/11,0
+PowerBI,8/11,0
+Data Science,8/12,2.08
+Leitura,8/12,0
+Japanese,8/12,0
+SQL,8/12,0
+Python,8/12,0
+Faculdade,8/12,1.33
+Other,8/12,2.7
+Soft Skills,8/12,0
+PowerBI,8/12,0
+Data Science,8/13,2.85
+Leitura,8/13,0.25
+Japanese,8/13,0
+SQL,8/13,0
+Python,8/13,0
+Faculdade,8/13,1.33
+Other,8/13,0
+Soft Skills,8/13,0
+PowerBI,8/13,0
+Data Science,8/14,2
+Leitura,8/14,0
+Japanese,8/14,0
+SQL,8/14,0
+Python,8/14,0
+Faculdade,8/14,0.68
+Other,8/14,1.5
+Soft Skills,8/14,0
+PowerBI,8/14,0
+Data Science,8/15,4.33
+Leitura,8/15,0.33
+Japanese,8/15,0
+SQL,8/15,0
+Python,8/15,0
+Faculdade,8/15,0.59
+Other,8/15,0.25
+Soft Skills,8/15,0
+PowerBI,8/15,0
+Data Science,8/16,2.5
+Leitura,8/16,0.25
+Japanese,8/16,0
+SQL,8/16,0
+Python,8/16,0
+Faculdade,8/16,1.95
+Other,8/16,0.5
+Soft Skills,8/16,0
+PowerBI,8/16,0
+Planning,8/16,0.33
+Data Science,8/17,4.8
+Leitura,8/17,0
+Japanese,8/17,0
+SQL,8/17,0
+Python,8/17,0
+Faculdade,8/17,0
+Other,8/17,0
+Soft Skills,8/17,0
+PowerBI,8/17,0
+Planning,8/17,0
+Data Science,8/18,1.9
+Leitura,8/18,0
+Japanese,8/18,0
+SQL,8/18,0
+Python,8/18,0
+Faculdade,8/18,0
+Other,8/18,0
+Soft Skills,8/18,0
+PowerBI,8/18,0
+Planning,8/18,0.3
+Data Science,8/19,3.4
+Leitura,8/19,0
+Japanese,8/19,0
+SQL,8/19,0
+Python,8/19,0
+Faculdade,8/19,3.36
+Other,8/19,0
+Soft Skills,8/19,0
+PowerBI,8/19,0
+Planning,8/19,0.2
+Data Science,8/20,3.75
+Leitura,8/20,0
+Japanese,8/20,0
+SQL,8/20,0
+Python,8/20,0
+Faculdade,8/20,0
+Other,8/20,0
+Soft Skills,8/20,0
+PowerBI,8/20,0
+Planning,8/20,0
+Data Science,8/21,2
+Leitura,8/21,0
+Japanese,8/21,0
+SQL,8/21,0
+Python,8/21,0
+Faculdade,8/21,1.15
+Other,8/21,0
+Soft Skills,8/21,0
+PowerBI,8/21,5.93
+Planning,8/21,0
+Data Science,8/22,3.25
+Leitura,8/22,0
+Japanese,8/22,0
+SQL,8/22,0
+Python,8/22,0
+Faculdade,8/22,0
+Other,8/22,1.25
+Soft Skills,8/22,0
+PowerBI,8/22,2.33
+Planning,8/22,0
+Data Science,8/23,0
+Leitura,8/23,0
+Japanese,8/23,0
+SQL,8/23,0
+Python,8/23,0
+Faculdade,8/23,0
+Other,8/23,0
+Soft Skills,8/23,0
+PowerBI,8/23,0
+Networking and linkedin,8/23,4
+Planning,8/23,0
+Data Science,8/24,0
+Leitura,8/24,0
+Japanese,8/24,0
+SQL,8/24,0
+Python,8/24,0
+Faculdade,8/24,1.6
+Other,8/24,0.16
+Soft Skills,8/24,0
+PowerBI,8/24,0
+Networking and linkedin,8/24,3.1
+Planning,8/24,0
+Data Science,8/25,0
+Leitura,8/25,0.25
+Japanese,8/25,0
+SQL,8/25,0
+Python,8/25,0
+Faculdade,8/25,2
+Other,8/25,0
+Soft Skills,8/25,0
+PowerBI,8/25,0
+Networking and linkedin,8/25,0.6
+Planning,8/25,0
+Data Science,8/26,0
+Leitura,8/26,0
+Japanese,8/26,0
+SQL,8/26,0
+Python,8/26,0
+Faculdade,8/26,2.33
+Other,8/26,1
+Soft Skills,8/26,0
+PowerBI,8/26,0
+Networking and linkedin,8/26,0.85
+Planning,8/26,0.25
+Data Science,8/27,0
+Leitura,8/27,0
+Japanese,8/27,0
+SQL,8/27,0
+Python,8/27,0
+Faculdade,8/27,1.42
+Other,8/27,4
+Soft Skills,8/27,0
+PowerBI,8/27,0
+Networking and linkedin,8/27,0.22
+Planning,8/27,0
+Data Science,8/28,1.32
+Leitura,8/28,0.33
+Japanese,8/28,0
+SQL,8/28,0
+Python,8/28,1.5
+Faculdade,8/28,3.39
+Other,8/28,0
+Soft Skills,8/28,0
+PowerBI,8/28,0
+Networking and linkedin,8/28,0.45
+Planning,8/28,0.25
+Data Science,8/29,0
+Leitura,8/29,0
+Japanese,8/29,0
+SQL,8/29,0
+Python,8/29,0
+Faculdade,8/29,1.75
+Other,8/29,0
+Soft Skills,8/29,0
+PowerBI,8/29,0
+Networking and linkedin,8/29,3.9
+Planning,8/29,0
+Data Science,8/30,0.4
+Leitura,8/30,0
+Japanese,8/30,0
+SQL,8/30,0
+Python,8/30,0
+Faculdade,8/30,1.1
+Other,8/30,0.5
+Soft Skills,8/30,0.25
+PowerBI,8/30,0
+Networking and linkedin,8/30,0.25
+Planning,8/30,0
+Data Science,8/31,0
+Leitura,8/31,0
+Japanese,8/31,0
+SQL,8/31,0
+Python,8/31,0
+Faculdade,8/31,0
+Other,8/31,2.75
+Soft Skills,8/31,0
+PowerBI,8/31,0
+Networking and linkedin,8/31,0
+Planning,8/31,0
+Data Science,9/1,0
+Leitura,9/1,0
+Japanese,9/1,0
+SQL,9/1,0
+Python,9/1,0
+Faculdade,9/1,0
+Other,9/1,0
+Soft Skills,9/1,0
+PowerBI,9/1,0
+Networking and linkedin,9/1,0
+Planning,9/1,0.5
+Data Science,9/2,1.1
+Leitura,9/2,0
+Japanese,9/2,0
+SQL,9/2,0
+Python,9/2,0
+Faculdade,9/2,2.75
+Other,9/2,0
+Soft Skills,9/2,0
+PowerBI,9/2,0
+Networking and linkedin,9/2,1
+Planning,9/2,0.75
+Data Science,9/3,0
+Leitura,9/3,0
+Japanese,9/3,0
+SQL,9/3,0
+Python,9/3,0
+Faculdade,9/3,2.4
+Other,9/3,0.83
+Soft Skills,9/3,0
+PowerBI,9/3,0
+Networking and linkedin,9/3,0
+Planning,9/3,0
+Data Science,9/4,0.17
+Leitura,9/4,0.18
+Japanese,9/4,0
+SQL,9/4,0
+Python,9/4,0.5
+Faculdade,9/4,0.83
+Other,9/4,0
+Soft Skills,9/4,0
+PowerBI,9/4,0
+Networking and linkedin,9/4,0.7
+Planning,9/4,0.92
+Data Science,9/5,0.4
+Leitura,9/5,0
+Japanese,9/5,0
+SQL,9/5,0
+Python,9/5,0.12
+Faculdade,9/5,2.67
+Other,9/5,1.72
+Soft Skills,9/5,0
+PowerBI,9/5,0
+Networking and linkedin,9/5,0
+Planning,9/5,0
+Data Science,9/6,0
+Leitura,9/6,0
+Japanese,9/6,0
+SQL,9/6,0
+Python,9/6,0
+Faculdade,9/6,0.33
+Other,9/6,2.48
+Soft Skills,9/6,0
+PowerBI,9/6,0
+Networking and linkedin,9/6,0
+Planning,9/6,0
+Data Science,9/7,1
+Leitura,9/7,0
+Japanese,9/7,0
+SQL,9/7,0
+Python,9/7,0
+Faculdade,9/7,0
+Other,9/7,0
+Soft Skills,9/7,0
+PowerBI,9/7,0
+Networking and linkedin,9/7,0
+Planning,9/7,0
+Data Science,9/8,0
+Leitura,9/8,0
+Japanese,9/8,0
+SQL,9/8,0
+Python,9/8,0
+Faculdade,9/8,0
+Other,9/8,0
+Soft Skills,9/8,0
+PowerBI,9/8,0
+Networking and linkedin,9/8,0
+Planning,9/8,0
+Data Science,9/9,0.75
+Leitura,9/9,0
+Japanese,9/9,0
+SQL,9/9,0
+Python,9/9,0.25
+Faculdade,9/9,2
+Other,9/9,1.08
+Soft Skills,9/9,0
+PowerBI,9/9,0
+Networking and linkedin,9/9,0.93
+Planning,9/9,0
+Data Science,9/10,0.72
+Leitura,9/10,0
+Japanese,9/10,0
+SQL,9/10,0
+Python,9/10,0
+Faculdade,9/10,3.15
+Other,9/10,0
+Soft Skills,9/10,0
+PowerBI,9/10,0
+Networking and linkedin,9/10,0.9
+Planning,9/10,0
+Data Science,9/11,0
+Leitura,9/11,0
+Japanese,9/11,0
+SQL,9/11,0
+Python,9/11,0
+Faculdade,9/11,3.25
+Other,9/11,0.25
+Soft Skills,9/11,0
+PowerBI,9/11,0
+Networking and linkedin,9/11,1.5
+Planning,9/11,0
+Data Science,9/12,0
+Leitura,9/12,0
+Japanese,9/12,0
+SQL,9/12,0
+Python,9/12,0
+Faculdade,9/12,0
+Other,9/12,4.45
+Soft Skills,9/12,0
+PowerBI,9/12,0
+Networking and linkedin,9/12,0
+Planning,9/12,0
+Data Science,9/13,0
+Leitura,9/13,0
+Japanese,9/13,0
+SQL,9/13,0
+Python,9/13,0
+Faculdade,9/13,3.5
+Other,9/13,0.5
+Soft Skills,9/13,0
+PowerBI,9/13,0
+Networking and linkedin,9/13,0
+Planning,9/13,0
+Data Science,9/14,0
+Leitura,9/14,0
+Japanese,9/14,0
+SQL,9/14,0
+Python,9/14,0
+Faculdade,9/14,1.5
+Other,9/14,0
+Soft Skills,9/14,0
+PowerBI,9/14,0
+Networking and linkedin,9/14,0
+Planning,9/14,0
+Data Science,9/15,0
+Leitura,9/15,0
+Japanese,9/15,0
+SQL,9/15,0
+Python,9/15,0
+Faculdade,9/15,0
+Other,9/15,0
+Soft Skills,9/15,0
+PowerBI,9/15,0
+Networking and linkedin,9/15,1.1
+Planning,9/15,0
+Data Science,9/16,1.15
+Leitura,9/16,0
+Japanese,9/16,0
+SQL,9/16,0.87
+Python,9/16,0.92
+Faculdade,9/16,0
+Other,9/16,2.37
+Soft Skills,9/16,0
+PowerBI,9/16,0
+Networking and linkedin,9/16,0
+Planning,9/16,0
+Data Science,9/17,0
+Leitura,9/17,0
+Japanese,9/17,0
+SQL,9/17,0
+Python,9/17,0
+Faculdade,9/17,0
+Other,9/17,3
+Soft Skills,9/17,0
+PowerBI,9/17,0
+Networking and linkedin,9/17,0.25
+Planning,9/17,0
+Data Science,9/18,0
+Leitura,9/18,0
+Japanese,9/18,0
+SQL,9/18,0
+Python,9/18,0
+Faculdade,9/18,1.28
+Other,9/18,0.5
+Soft Skills,9/18,0
+PowerBI,9/18,0
+Networking and linkedin,9/18,0.25
+Planning,9/18,0
+Data Science,9/19,1.53
+Leitura,9/19,0
+Japanese,9/19,0
+SQL,9/19,0
+Python,9/19,0
+Faculdade,9/19,1.85
+Other,9/19,0
+Soft Skills,9/19,0
+PowerBI,9/19,0
+Networking and linkedin,9/19,0
+Planning,9/19,0
+Data Science,9/20,1.65
+Leitura,9/20,0
+Japanese,9/20,0
+SQL,9/20,0
+Python,9/20,0
+Faculdade,9/20,0
+Other,9/20,0
+Soft Skills,9/20,0
+PowerBI,9/20,0
+Networking and linkedin,9/20,1.25
+Planning,9/20,0
+Data Science,9/21,0
+Leitura,9/21,0
+Japanese,9/21,0
+SQL,9/21,0
+Python,9/21,0
+Faculdade,9/21,2
+Other,9/21,0
+Soft Skills,9/21,0
+PowerBI,9/21,0
+Networking and linkedin,9/21,0
+Planning,9/21,0
+Data Science,9/22,0
+Leitura,9/22,0.25
+Japanese,9/22,0
+SQL,9/22,0
+Python,9/22,0
+Faculdade,9/22,1
+Other,9/22,0
+Soft Skills,9/22,0
+PowerBI,9/22,0
+Networking and linkedin,9/22,0
+Planning,9/22,0
+Data Science,9/23,0.74
+Leitura,9/23,0
+Japanese,9/23,0
+SQL,9/23,1
+Python,9/23,0
+Faculdade,9/23,0.5
+Other,9/23,1.08
+Soft Skills,9/23,0
+PowerBI,9/23,0.75
+Networking and linkedin,9/23,0.83
+Planning,9/23,0.25
+Data Science,9/24,2.7
+Leitura,9/24,0
+Japanese,9/24,0
+SQL,9/24,0
+Python,9/24,0.12
+Faculdade,9/24,0
+Other,9/24,0
+Soft Skills,9/24,0
+PowerBI,9/24,0
+Networking and linkedin,9/24,2.07
+Planning,9/24,0
+Data Science,9/25,1.33
+Leitura,9/25,0
+Japanese,9/25,0
+SQL,9/25,0
+Python,9/25,0
+Faculdade,9/25,0
+Other,9/25,1.7
+Soft Skills,9/25,0
+PowerBI,9/25,0
+Networking and linkedin,9/25,2.2
+Planning,9/25,0
+Data Science,9/26,2.25
+Leitura,9/26,0.3
+Japanese,9/26,0
+SQL,9/26,0
+Python,9/26,0
+Faculdade,9/26,0
+Other,9/26,0
+Soft Skills,9/26,0
+PowerBI,9/26,0
+Networking and linkedin,9/26,2.75
+Planning,9/26,0
+Data Science,9/27,3.15
+Leitura,9/27,0
+Japanese,9/27,0
+SQL,9/27,0
+Python,9/27,0
+Faculdade,9/27,0
+Other,9/27,0
+Soft Skills,9/27,0
+PowerBI,9/27,1.25
+Networking and linkedin,9/27,0.25
+Planning,9/27,0
+Data Science,9/28,0.25
+Leitura,9/28,0.25
+Japanese,9/28,0
+SQL,9/28,0.63
+Python,9/28,0
+Faculdade,9/28,0
+Other,9/28,0.5
+Soft Skills,9/28,0
+PowerBI,9/28,0
+Networking and linkedin,9/28,0.5
+Planning,9/28,0
+Data Science,9/29,0
+Leitura,9/29,0
+Japanese,9/29,0
+SQL,9/29,0.5
+Python,9/29,0
+Faculdade,9/29,0
+Other,9/29,0
+Soft Skills,9/29,0
+PowerBI,9/29,0
+Networking and linkedin,9/29,0.25
+Planning,9/29,0
+Data Science,9/30,0
+Leitura,9/30,0
+Japanese,9/30,0
+SQL,9/30,0
+Python,9/30,0
+Faculdade,9/30,0
+Other,9/30,0
+Soft Skills,9/30,0
+PowerBI,9/30,0
+Networking and linkedin,9/30,4.15
+Planning,9/30,0.5
+Data Science,10/1,1.25
+Leitura,10/1,0
+Japanese,10/1,0
+SQL,10/1,0
+Python,10/1,0
+Faculdade,10/1,0
+Other,10/1,3
+Soft Skills,10/1,0
+PowerBI,10/1,0
+Networking and linkedin,10/1,0.6
+Planning,10/1,0
+Data Science,10/2,0
+Leitura,10/2,1.25
+Japanese,10/2,0
+SQL,10/2,0
+Python,10/2,0
+Faculdade,10/2,1
+Other,10/2,0
+Soft Skills,10/2,0
+PowerBI,10/2,0
+Networking and linkedin,10/2,2.39
+Planning,10/2,0.38
+Data Science,10/3,1.13
+Leitura,10/3,0.75
+Japanese,10/3,0
+SQL,10/3,0
+Python,10/3,0
+Faculdade,10/3,0
+Other,10/3,0
+Soft Skills,10/3,0.25
+PowerBI,10/3,0.85
+Networking and linkedin,10/3,3.67
+Planning,10/3,0.25
+Data Science,10/4,1
+Leitura,10/4,0
+Japanese,10/4,0
+SQL,10/4,0
+Python,10/4,0
+Faculdade,10/4,0
+Other,10/4,0
+Soft Skills,10/4,0
+PowerBI,10/4,0
+Networking and linkedin,10/4,1.25
+Planning,10/4,0.25
