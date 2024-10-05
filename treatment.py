@@ -53,7 +53,7 @@ if not df.empty:
 
             # Add the weekly rolling average line
             fig.add_scatter(x=df_daily['Full_Date'], y=df_daily['Weekly Average'],
-                             mode='lines', name='Weekly Average', line=dict(width=2, color='red'))
+                             mode='lines', name='Weekly Average', line=dict(width=2, color='red'))  # Change to red
 
             # Update layout for wider dimensions and improve aesthetics
             fig.update_traces(line=dict(width=4, color='royalblue'),  # Set line width and color for total hours
