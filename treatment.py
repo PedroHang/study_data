@@ -12,57 +12,34 @@ def fetch_data():
     if response.status_code == 200:
         return response.json()
     else:
-        st.error("Error fetching data from SheetDB")
+        st.error(f"Failed to fetch data. Status code: {response.status_code}")
         return []
 
-# Initialize a session state variable to store the DataFrame
-if 'dataframe' not in st.session_state:
-    st.session_state['dataframe'] = pd.DataFrame()
-
-# Function to update the DataFrame
-def update_data():
-    data = fetch_data()
-    if data:
-        # Convert to DataFrame and convert all numeric columns to float
-        df = pd.DataFrame(data)
-        for col in df.select_dtypes(include='number').columns:
-            df[col] = df[col].astype(float)
-        st.session_state['dataframe'] = df
-
-# Load data initially
-update_data()
-
 # Streamlit UI
-st.title("Data Visualization from SheetDB")
+st.title("Daily Hours Visualization")
 
-# Button to re-upload the data
-if st.button("Re-upload Data"):
-    update_data()
-    st.success("Data re-uploaded successfully!")
+# Fetch and display data
+data = fetch_data()
+df = pd.DataFrame(data)
 
-# Display the DataFrame
-if not st.session_state['dataframe'].empty:
-    st.write("Here is the data fetched from the API:")
-    st.dataframe(st.session_state['dataframe'])
+if not df.empty:
+    # Convert 'Hours' to numeric and handle errors
+    df['Hours'] = pd.to_numeric(df['Hours'], errors='coerce')
 
-    # Check if 'date' column exists
-    if 'date' in st.session_state['dataframe'].columns:
-        # Convert 'date' column to datetime format
-        st.session_state['dataframe']['date'] = pd.to_datetime(st.session_state['dataframe']['date'])
+    # Group by 'Full_Date' and sum the hours
+    df_daily = df.groupby("Full_Date")['Hours'].sum().reset_index()
 
-        # Group by date and sum the total hours
-        total_hours = st.session_state['dataframe'].groupby('date').sum(numeric_only=True).reset_index()
+    # Check if df_daily is not empty before plotting
+    if not df_daily.empty:
+        # Create a Plotly line chart
+        fig = px.line(df_daily, x='Full_Date', y='Hours', 
+                      title='Total Hours Per Day',
+                      labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
+                      markers=True)
 
-        # Display the total_hours DataFrame for debugging
-        st.write("Total Hours DataFrame:")
-        st.dataframe(total_hours)
-
-        # Check if total_hours DataFrame is not empty before plotting
-        if not total_hours.empty and total_hours.shape[1] > 1:
-            # Create a Plotly graph
-            fig = px.line(total_hours, x='date', y=total_hours.columns[1:], title='Total Hours for Each Day Over Time')
-            st.plotly_chart(fig)
-        else:
-            st.warning("No total hours available for plotting.")
+        # Show the Plotly chart in Streamlit
+        st.plotly_chart(fig)
+    else:
+        st.warning("No data available for daily hours.")
 else:
-    st.warning("No data available.")
+    st.warning("No data fetched from the API.")
