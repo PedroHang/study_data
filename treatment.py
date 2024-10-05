@@ -32,6 +32,9 @@ else:
 if not df.empty:
     # Convert 'Hours' to numeric and handle errors
     df['Hours'] = pd.to_numeric(df['Hours'], errors='coerce')
+    
+    # Convert 'Full_Date' to datetime format
+    df['Full_Date'] = pd.to_datetime(df['Full_Date'], errors='coerce')
 
     # Group by 'Full_Date' and sum the hours
     df_daily = df.groupby("Full_Date")['Hours'].sum().reset_index()
@@ -40,7 +43,6 @@ if not df.empty:
     df_daily['Rolling Volatility'] = df_daily['Hours'].rolling(window=7).std()
 
     # Calculate the weekly average starting from Monday
-    df_daily['Full_Date'] = pd.to_datetime(df_daily['Full_Date'])
     df_daily['Week'] = df_daily['Full_Date'].dt.to_period('W').apply(lambda r: r.start_time)  # Get the start date of the week
     df_weekly = df_daily.groupby('Week')['Hours'].mean().reset_index()
 
@@ -122,7 +124,7 @@ if not df.empty:
     days = st.slider("Select Last X Days:", min_value=1, max_value=max_days, value=max_days)
 
     # Calculate the date range
-    end_date = df['Full_Date'].max()  # Get the maximum date from the data
+    end_date = df_daily['Full_Date'].max()  # Get the maximum date from the data
     start_date = end_date - timedelta(days=days)  # Calculate start date based on the slider
 
     # Filter the DataFrame for the selected date range
