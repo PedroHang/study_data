@@ -31,11 +31,14 @@ if not df.empty:
 
     # Check if df_daily is not empty before plotting
     if not df_daily.empty:
-        # Create a Plotly line chart
+        # Create a Plotly line chart with wider dimensions
         fig = px.line(df_daily, x='Full_Date', y='Hours', 
                       title='Total Hours Per Day',
                       labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
                       markers=True)
+        
+        # Update layout to increase width
+        fig.update_layout(width=1200)  # Set width to 1200 pixels
 
         # Show the Plotly chart in Streamlit
         st.plotly_chart(fig)
