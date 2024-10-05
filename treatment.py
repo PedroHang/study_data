@@ -35,19 +35,39 @@ if not df.empty:
     # Group by 'Full_Date' and sum the hours
     df_daily = df.groupby("Full_Date")['Hours'].sum().reset_index()
 
+    # Calculate the 7-day rolling standard deviation
+    df_daily['Rolling Volatility'] = df_daily['Hours'].rolling(window=7).std()
+
     # Check if df_daily is not empty before plotting
     if not df_daily.empty:
-        # Create a Plotly line chart for total hours per day
-        fig = px.line(df_daily, x='Full_Date', y='Hours', 
-                      title='Total Hours Per Day',
-                      labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
-                      markers=True)
-        
-        # Update layout for wider dimensions
-        fig.update_layout(width=1800)
+        # Toggle between Total Hours and Rolling Volatility
+        plot_option = st.selectbox("Select Plot Type:", ("Total Hours", "Rolling Volatility"))
 
-        # Show the Plotly chart in Streamlit
-        st.plotly_chart(fig)
+        if plot_option == "Total Hours":
+            # Create a Plotly line chart for total hours per day
+            fig = px.line(df_daily, x='Full_Date', y='Hours', 
+                          title='Total Hours Per Day',
+                          labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
+                          markers=True)
+
+            # Update layout for wider dimensions
+            fig.update_layout(width=1800)
+
+            # Show the Plotly chart in Streamlit
+            st.plotly_chart(fig)
+
+        elif plot_option == "Rolling Volatility":
+            # Create a Plotly line chart for rolling volatility
+            fig_volatility = px.line(df_daily, x='Full_Date', y='Rolling Volatility',
+                                     title='7-Day Rolling Volatility',
+                                     labels={'Full_Date': 'Date', 'Rolling Volatility': 'Volatility'},
+                                     markers=True)
+
+            # Update layout for wider dimensions
+            fig_volatility.update_layout(width=1800)
+
+            # Show the Plotly chart in Streamlit
+            st.plotly_chart(fig_volatility)
     else:
         st.warning("No data available for daily hours.")
 
