@@ -17,7 +17,7 @@ def fetch_data():
         return []
 
 # Streamlit UI
-st.title("Daily Hours Visualization")
+st.title("My Daily Study Routine")
 
 # Fetch and display data
 data = fetch_data()
@@ -32,18 +32,41 @@ if not df.empty:
 
     # Check if df_daily is not empty before plotting
     if not df_daily.empty:
-        # Create a Plotly line chart with wider dimensions
+        # Create a Plotly line chart for total hours per day
         fig = px.line(df_daily, x='Full_Date', y='Hours', 
                       title='Total Hours Per Day',
                       labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
                       markers=True)
         
-        # Update layout to increase width
-        fig.update_layout(width=1800) 
+        # Update layout for wider dimensions
+        fig.update_layout(width=1800)
 
         # Show the Plotly chart in Streamlit
         st.plotly_chart(fig)
     else:
         st.warning("No data available for daily hours.")
+
+    # --- New Section for Visualization by Study ---
+
+    st.subheader("Total Hours by Study")
+
+    # Group by 'Study' and sum the hours
+    df_study = df.groupby("Study")['Hours'].sum().reset_index()
+
+    # Check if df_study is not empty before plotting
+    if not df_study.empty:
+        # Create a Plotly bar chart for total hours by study
+        fig_study = px.bar(df_study, x='Study', y='Hours', 
+                           title='Total Hours by Study',
+                           labels={'Study': 'Study', 'Hours': 'Total Hours'},
+                           text='Hours')  # Display hours on the bars
+        
+        # Update layout for wider dimensions
+        fig_study.update_layout(width=1800)
+
+        # Show the Plotly chart in Streamlit
+        st.plotly_chart(fig_study)
+    else:
+        st.warning("No data available for study breakdown.")
 else:
     st.warning("No data fetched from the API.")
