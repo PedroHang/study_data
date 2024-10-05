@@ -53,9 +53,16 @@ if not st.session_state['dataframe'].empty:
         # Group by date and sum the total hours
         total_hours = st.session_state['dataframe'].groupby('date').sum().reset_index()
 
-        # Create a Plotly graph
-        fig = px.line(total_hours, x='date', y=total_hours.columns[1:], title='Total Hours for Each Day Over Time')
-        st.plotly_chart(fig)
+        # Display the total_hours DataFrame for debugging
+        st.write("Total Hours DataFrame:")
+        st.dataframe(total_hours)
 
+        # Check if total_hours DataFrame is not empty before plotting
+        if not total_hours.empty:
+            # Create a Plotly graph
+            fig = px.line(total_hours, x='date', y=total_hours.columns[1:], title='Total Hours for Each Day Over Time')
+            st.plotly_chart(fig)
+        else:
+            st.warning("No total hours available for plotting.")
 else:
     st.warning("No data available.")
