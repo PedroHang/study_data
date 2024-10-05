@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import base64
+from datetime import datetime, timedelta
 
 # Function to load CSV data from GitHub
 @st.cache_data
@@ -44,8 +45,40 @@ def update_csv(df):
 
     return response.ok
 
+# Initialize missing dates with 0 hours for all subjects
+def initialize_missing_dates(df):
+    subjects = df['Study'].unique().tolist()
+    
+    # Get the date range from the last date in the CSV until today
+    df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+    last_date = df['Date'].max()
+    today = pd.to_datetime(datetime.today().strftime('%m/%d/%Y'))
+
+    date_range = pd.date_range(start=last_date + timedelta(days=1), end=today)
+
+    # Create missing rows for each date and subject
+    missing_rows = []
+    for date in date_range:
+        date_str = date.strftime('%m/%d/%Y')
+        for subject in subjects:
+            if df[(df['Date'] == date_str) & (df['Study'] == subject)].empty:
+                missing_rows.append({'Study': subject, 'Date': date_str, 'Hours': 0})
+
+    # Add missing rows to the dataframe
+    if missing_rows:
+        df = pd.concat([df, pd.DataFrame(missing_rows)], ignore_index=True)
+
+    return df
+
 # Load the data
 df = load_data()
+
+# Initialize missing dates with 0 hours for all subjects
+df = initialize_missing_dates(df)
+
+# Sort the dataframe by date (most recent first)
+df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+df = df.sort_values(by='Date', ascending=False).reset_index(drop=True)
 
 # Display an editable DataFrame
 st.write("Edit Study Hours:")
