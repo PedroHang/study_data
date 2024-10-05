@@ -165,7 +165,7 @@ if not df.empty:
     for index, row in top_studies.iterrows():
         # Use HTML to format the metric with a custom color
         st.markdown(
-            f"<h3 style='color: {colors[index]};'>{row['Study']}: {row['Hours']:.2f} Hours</h3>",
+            f"<div style='color: {colors[index]}; font-size: 24px; font-weight: bold;'>{row['Study']}: {row['Hours']:.2f} Hours</div>",
             unsafe_allow_html=True
         )
 else:
