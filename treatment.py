@@ -87,15 +87,16 @@ if not df.empty:
             st.plotly_chart(fig_volatility)
 
         elif plot_option == "Weekly Average":
-            # Create a Plotly line chart for weekly average
-            fig_weekly = px.line(df_weekly, x='Week', y='Hours',
+            # Create a Plotly bar chart for weekly average
+            fig_weekly = px.bar(df_weekly, x='Week', y='Hours',
                                  title='Weekly Average Study Hours',
                                  labels={'Week': 'Week Start Date', 'Hours': 'Average Hours'},
-                                 markers=True)
+                                 text='Hours',  # Display average hours on the bars
+                                 color='Hours',  # Color by average hours
+                                 color_continuous_scale=px.colors.sequential.Viridis)  # Color scale
 
             # Update layout for wider dimensions and improve aesthetics
-            fig_weekly.update_traces(line=dict(width=4, color='green'),  # Set line width and color
-                                     marker=dict(size=8, symbol='circle'))  # Set marker size and shape
+            fig_weekly.update_traces(marker=dict(line=dict(width=1, color='black')))  # Add outline to bars
             fig_weekly.update_layout(title_font=dict(size=24),  # Title font size
                                       xaxis_title_font=dict(size=18),  # X-axis title font size
                                       yaxis_title_font=dict(size=18),  # Y-axis title font size
