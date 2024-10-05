@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import plotly.express as px
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 # Define the API endpoint
 API_URL = "https://sheetdb.io/api/v1/pqxbedqqemsvb"
@@ -32,9 +32,6 @@ else:
 if not df.empty:
     # Convert 'Hours' to numeric and handle errors
     df['Hours'] = pd.to_numeric(df['Hours'], errors='coerce')
-    
-    # Convert 'Full_Date' to datetime format
-    df['Full_Date'] = pd.to_datetime(df['Full_Date'], errors='coerce')
 
     # Group by 'Full_Date' and sum the hours
     df_daily = df.groupby("Full_Date")['Hours'].sum().reset_index()
@@ -43,6 +40,7 @@ if not df.empty:
     df_daily['Rolling Volatility'] = df_daily['Hours'].rolling(window=7).std()
 
     # Calculate the weekly average starting from Monday
+    df_daily['Full_Date'] = pd.to_datetime(df_daily['Full_Date'])
     df_daily['Week'] = df_daily['Full_Date'].dt.to_period('W').apply(lambda r: r.start_time)  # Get the start date of the week
     df_weekly = df_daily.groupby('Week')['Hours'].mean().reset_index()
 
@@ -115,43 +113,52 @@ if not df.empty:
     else:
         st.warning("No data available for daily hours.")
 
-    # --- New Section for Visualization by Subject ---
-    
+    # --- New Section for Visualization by Study ---
+
     st.subheader("Total Hours by Subject")
 
-    # Add a slider to select the last x days
-    max_days = 30  # Set maximum number of days for the slider
-    days = st.slider("Select Last X Days:", min_value=1, max_value=max_days, value=max_days)
+    # Slider for selecting the number of days
+    days = st.slider("Select the last X days:", min_value=1, max_value=30, value=30)
 
     # Calculate the date range
-    end_date = df_daily['Full_Date'].max()  # Get the maximum date from the data
+    end_date = df['Full_Date'].max()  # Get the maximum date from the DataFrame
     start_date = end_date - timedelta(days=days)  # Calculate start date based on the slider
 
     # Filter the DataFrame for the selected date range
     df_filtered = df_daily[(df_daily['Full_Date'] >= start_date) & (df_daily['Full_Date'] <= end_date)]
 
-    # Group by 'Study' and sum the hours for the filtered DataFrame
-    df_study = df_filtered.groupby("Study")['Hours'].sum().reset_index()
+    # Print column names for debugging
+    st.write("Filtered DataFrame Columns:", df_filtered.columns)
 
-    # Sort the DataFrame by Hours in descending order
-    df_study = df_study.sort_values(by='Hours', ascending=False)
+    # Check the contents of df_filtered
+    st.write("Filtered DataFrame Preview:", df_filtered)
 
-    # Check if df_study is not empty before plotting
-    if not df_study.empty:
-        # Create a Plotly bar chart for total hours by study with a color palette
-        fig_study = px.bar(df_study, x='Study', y='Hours', 
-                           title='Total Hours by Study (Last X Days)',
-                           labels={'Study': 'Study', 'Hours': 'Total Hours'},
-                           text='Hours',  # Display hours on the bars
-                           color='Hours',  # Color by hours
-                           color_continuous_scale=px.colors.sequential.Viridis)  # Beautiful color palette
-        
-        # Update layout for wider dimensions
-        fig_study.update_layout(width=1800)
+    # Check if 'Study' column exists
+    if 'Study' in df.columns:
+        # Group by 'Study' and sum the hours for the filtered DataFrame
+        df_study = df_filtered.groupby("Study")['Hours'].sum().reset_index()
 
-        # Show the Plotly chart in Streamlit
-        st.plotly_chart(fig_study)
+        # Sort the DataFrame by Hours in descending order
+        df_study = df_study.sort_values(by='Hours', ascending=False)
+
+        # Check if df_study is not empty before plotting
+        if not df_study.empty:
+            # Create a Plotly bar chart for total hours by study with a color palette
+            fig_study = px.bar(df_study, x='Study', y='Hours', 
+                               title='Total Hours by Study',
+                               labels={'Study': 'Study', 'Hours': 'Total Hours'},
+                               text='Hours',  # Display hours on the bars
+                               color='Hours',  # Color by hours
+                               color_continuous_scale=px.colors.sequential.Viridis)  # Beautiful color palette
+            
+            # Update layout for wider dimensions
+            fig_study.update_layout(width=1800)
+
+            # Show the Plotly chart in Streamlit
+            st.plotly_chart(fig_study)
+        else:
+            st.warning("No data available for study breakdown.")
     else:
-        st.warning("No data available for study breakdown.")
+        st.warning("'Study' column is missing in the dataset.")
 else:
     st.warning("No data fetched from the API.")
