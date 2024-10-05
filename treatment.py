@@ -50,10 +50,10 @@ def initialize_missing_dates(df):
     subjects = df['Study'].unique().tolist()
 
     # Convert 'Full-Date' to datetime format
-    df['Full-Date'] = pd.to_datetime(df['Full-Date'], format='%m/%d/%Y')
+    df['Full_Date'] = pd.to_datetime(df['Full_Date'], format='%m/%d/%Y')
     
     # Get the date range from the last date in the CSV until today
-    last_date = df['Full-Date'].max()
+    last_date = df['Full_Date'].max()
     today = pd.to_datetime(datetime.today().strftime('%m/%d/%Y'))
 
     date_range = pd.date_range(start=last_date + timedelta(days=1), end=today)
@@ -62,10 +62,10 @@ def initialize_missing_dates(df):
     for date in date_range:
         date_str = date.strftime('%m/%d/%Y')
         for subject in subjects:
-            if not df[(df['Full-Date'] == date) & (df['Study'] == subject)].empty:
+            if not df[(df['Full_Date'] == date) & (df['Study'] == subject)].empty:
                 continue
             # Append the missing entry with 0 hours
-            new_row = pd.DataFrame({'Study': [subject], 'Full-Date': [date_str], 'Hours': [0]})
+            new_row = pd.DataFrame({'Study': [subject], 'Full_Date': [date_str], 'Hours': [0]})
             df = pd.concat([df, new_row], ignore_index=True)
 
     return df
@@ -77,8 +77,8 @@ df = load_data()
 df = initialize_missing_dates(df)
 
 # Sort the dataframe by date (most recent first)
-df['Full-Date'] = pd.to_datetime(df['Full-Date'], format='%m/%d/%Y')
-df = df.sort_values(by='Full-Date', ascending=False)
+df['Full_Date'] = pd.to_datetime(df['Full_Date'], format='%m/%d/%Y')
+df = df.sort_values(by='Full_Date', ascending=False)
 
 # Display an editable DataFrame
 st.write("Edit Study Hours:")
