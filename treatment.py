@@ -5,6 +5,7 @@ import plotly.express as px
 
 # Define the API endpoint
 API_URL = "https://sheetdb.io/api/v1/pqxbedqqemsvb"
+st.set_page_config(layout="wide")
 
 # Function to fetch data from the API
 def fetch_data():
@@ -38,7 +39,7 @@ if not df.empty:
                       markers=True)
         
         # Update layout to increase width
-        fig.update_layout(width=1500)  # Set width to 1200 pixels
+        fig.update_layout(width=1800) 
 
         # Show the Plotly chart in Streamlit
         st.plotly_chart(fig)
