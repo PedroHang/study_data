@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
 import requests
 import base64
 
@@ -48,40 +47,18 @@ def update_csv(df):
 # Load the data
 df = load_data()
 
-# Select a subject from the unique subjects
-subjects = df['Study'].unique().tolist()
-selected_subject = st.selectbox("Select a Subject:", subjects)
+# Display an editable DataFrame
+st.write("Edit Study Hours:")
+edited_df = st.data_editor(df, use_container_width=True)
 
-# Input for hours
-hours_to_add = st.number_input("Enter Hours to Add (e.g., 2.5):", min_value=0.0, format="%.2f")
-selected_date = st.date_input("Select Date:", value=datetime.today())
-
-if st.button("Add Hours"):
-    # Load the latest data again
-    df = load_data()
-    
-    # Use the full date directly
-    full_date = selected_date  
-
-    # Add the new hours if the entry exists
-    if not df[(df['Full_Date'] == full_date) & (df['Study'] == selected_subject)].empty:
-        # Increment the existing hours
-        df.loc[(df['Full_Date'] == full_date) & (df['Study'] == selected_subject), 'Hours'] += hours_to_add
-    else:
-        # If it doesn't exist, create a new entry
-        new_entry = pd.DataFrame({
-            'Study': [selected_subject],
-            'Full_Date': [full_date],  # Use the full date including the year
-            'Hours': [hours_to_add]
-        })
-        df = pd.concat([df, new_entry], ignore_index=True)
-
+# Button to update the GitHub file
+if st.button("Save Changes"):
     # Update the CSV file on GitHub
-    if update_csv(df):
-        st.success("Hours added and file updated successfully!")
+    if update_csv(edited_df):
+        st.success("Changes saved and file updated successfully!")
     else:
         st.error("Failed to update the file on GitHub.")
 
-# Display the updated DataFrame
+# Display the current DataFrame
 st.write("Current Study Hours:")
-st.dataframe(df)
+st.dataframe(edited_df)
