@@ -45,28 +45,28 @@ def update_csv(df):
 
     return response.ok
 
-# Initialize missing dates with 0 hours for all subjects
+# Function to initialize missing dates
 def initialize_missing_dates(df):
     subjects = df['Study'].unique().tolist()
+
+    # Convert 'Full-Date' to datetime format
+    df['Full-Date'] = pd.to_datetime(df['Full-Date'], format='%m/%d/%Y')
     
     # Get the date range from the last date in the CSV until today
-    df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
-    last_date = df['Date'].max()
+    last_date = df['Full-Date'].max()
     today = pd.to_datetime(datetime.today().strftime('%m/%d/%Y'))
 
     date_range = pd.date_range(start=last_date + timedelta(days=1), end=today)
 
-    # Create missing rows for each date and subject
-    missing_rows = []
+    # Create missing entries for each subject and date in the date range
     for date in date_range:
         date_str = date.strftime('%m/%d/%Y')
         for subject in subjects:
-            if df[(df['Date'] == date_str) & (df['Study'] == subject)].empty:
-                missing_rows.append({'Study': subject, 'Date': date_str, 'Hours': 0})
-
-    # Add missing rows to the dataframe
-    if missing_rows:
-        df = pd.concat([df, pd.DataFrame(missing_rows)], ignore_index=True)
+            if not df[(df['Full-Date'] == date) & (df['Study'] == subject)].empty:
+                continue
+            # Append the missing entry with 0 hours
+            new_row = pd.DataFrame({'Study': [subject], 'Full-Date': [date_str], 'Hours': [0]})
+            df = pd.concat([df, new_row], ignore_index=True)
 
     return df
 
@@ -77,8 +77,8 @@ df = load_data()
 df = initialize_missing_dates(df)
 
 # Sort the dataframe by date (most recent first)
-df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
-df = df.sort_values(by='Date', ascending=False).reset_index(drop=True)
+df['Full-Date'] = pd.to_datetime(df['Full-Date'], format='%m/%d/%Y')
+df = df.sort_values(by='Full-Date', ascending=False)
 
 # Display an editable DataFrame
 st.write("Edit Study Hours:")
