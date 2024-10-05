@@ -31,21 +31,17 @@ if not df.empty:
 
     # Check if df_daily is not empty before plotting
     if not df_daily.empty:
-        # Create a Plotly line chart
+        # Create a Plotly line chart with wider dimensions
         fig = px.line(df_daily, x='Full_Date', y='Hours', 
                       title='Total Hours Per Day',
                       labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
                       markers=True)
         
-        # Update layout for full screen width
-        fig.update_layout(
-            width=0,          # Set width to auto
-            height=600,      # Set height as needed
-            autosize=True     # Ensure it adjusts to full width
-        )
+        # Update layout to increase width
+        fig.update_layout(width=1500)  # Set width to 1200 pixels
 
         # Show the Plotly chart in Streamlit
-        st.plotly_chart(fig, use_container_width=True)  # Set use_container_width to True for full width
+        st.plotly_chart(fig)
     else:
         st.warning("No data available for daily hours.")
 else:
