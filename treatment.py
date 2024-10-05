@@ -18,7 +18,7 @@ def update_csv(df):
     token = st.secrets["GITHUB_TOKEN"]
     message = "Update study hours"
     content = df.to_csv(index=False).encode("utf-8")
-    
+
     # Get the current file SHA to update
     response = requests.get(url, headers={"Authorization": f"token {token}"})
     
@@ -27,14 +27,14 @@ def update_csv(df):
         return False
 
     sha = response.json()["sha"]
-    
+
     # Create a payload for the PUT request
     payload = {
         "message": message,
         "content": base64.b64encode(content).decode("utf-8"),
         "sha": sha
     }
-    
+
     # Update the file on GitHub
     response = requests.put(url, headers={"Authorization": f"token {token}"}, json=payload)
 
@@ -44,7 +44,6 @@ def update_csv(df):
         st.error(f"Failed to update the file: {response.status_code} - {response.text}")
 
     return response.ok
-
 
 # Load the data
 df = load_data()
@@ -58,12 +57,15 @@ hours_to_add = st.number_input("Enter Hours to Add (e.g., 2.5):", min_value=0.0,
 selected_date = st.date_input("Select Date:", value=datetime.today())
 
 if st.button("Add Hours"):
+    # Load the latest data again
+    df = load_data()
+    
     # Update DataFrame with the new hours
     date_str = selected_date.strftime("%m/%d")
     
     # Add the new hours if the entry exists
     if not df[(df['Date'] == date_str) & (df['Study'] == selected_subject)].empty:
-        # Add the new hours
+        # Increment the existing hours
         df.loc[(df['Date'] == date_str) & (df['Study'] == selected_subject), 'Hours'] += hours_to_add
     else:
         # If it doesn't exist, create a new entry
@@ -73,12 +75,6 @@ if st.button("Add Hours"):
             'Hours': [hours_to_add]
         })
         df = pd.concat([df, new_entry], ignore_index=True)
-
-    # Ensure all subjects for the selected date are set to 0 if not present
-    for subject in subjects:
-        if subject not in df['Study'][df['Date'] == date_str].values:
-            new_row = pd.DataFrame({'Study': [subject], 'Date': [date_str], 'Hours': [0]})
-            df = pd.concat([df, new_row], ignore_index=True)
 
     # Update the CSV file on GitHub
     if update_csv(df):
