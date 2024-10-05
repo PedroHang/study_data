@@ -19,9 +19,14 @@ def fetch_data():
 # Streamlit UI
 st.title("My Daily Study Routine")
 
-# Fetch and display data
-data = fetch_data()
-df = pd.DataFrame(data)
+# Button to refresh data
+if st.button("Refresh Data"):
+    data = fetch_data()
+    df = pd.DataFrame(data)
+else:
+    # Fetch and display data only if button is not clicked
+    data = fetch_data()
+    df = pd.DataFrame(data)
 
 if not df.empty:
     # Convert 'Hours' to numeric and handle errors
