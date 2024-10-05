@@ -29,10 +29,6 @@ else:
     df = pd.DataFrame(data)
 
 if not df.empty:
-    # Display the raw data in a table view
-    st.subheader("Raw Data")
-    st.dataframe(df)  # Display the data as a table
-
     # Convert 'Hours' to numeric and handle errors
     df['Hours'] = pd.to_numeric(df['Hours'], errors='coerce')
 
