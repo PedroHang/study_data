@@ -58,13 +58,18 @@ if not df.empty:
     # Group by 'Study' and sum the hours
     df_study = df.groupby("Study")['Hours'].sum().reset_index()
 
+    # Sort the DataFrame by Hours in descending order
+    df_study = df_study.sort_values(by='Hours', ascending=False)
+
     # Check if df_study is not empty before plotting
     if not df_study.empty:
-        # Create a Plotly bar chart for total hours by study
+        # Create a Plotly bar chart for total hours by study with a color palette
         fig_study = px.bar(df_study, x='Study', y='Hours', 
                            title='Total Hours by Study',
                            labels={'Study': 'Study', 'Hours': 'Total Hours'},
-                           text='Hours')  # Display hours on the bars
+                           text='Hours',  # Display hours on the bars
+                           color='Hours',  # Color by hours
+                           color_continuous_scale=px.colors.sequential.Viridis)  # Beautiful color palette
         
         # Update layout for wider dimensions
         fig_study.update_layout(width=1800)
