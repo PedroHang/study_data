@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import requests
 import plotly.express as px
-from datetime import datetime, timedelta
 
 # Define the API endpoint
 API_URL = "https://sheetdb.io/api/v1/pqxbedqqemsvb"
@@ -113,23 +112,12 @@ if not df.empty:
     else:
         st.warning("No data available for daily hours.")
 
-    # --- New Section for Visualization by Subject ---
-    
+    # --- New Section for Visualization by Study ---
+
     st.subheader("Total Hours by Subject")
 
-    # Add a slider to select the last x days
-    max_days = 30  # Set maximum number of days for the slider
-    days = st.slider("Select Last X Days:", min_value=1, max_value=max_days, value=max_days)
-
-    # Calculate the date range
-    end_date = df['Full_Date'].max()  # Get the maximum date from the data
-    start_date = end_date - timedelta(days=days)  # Calculate start date based on the slider
-
-    # Filter the DataFrame for the selected date range
-    df_filtered = df_daily[(df_daily['Full_Date'] >= start_date) & (df_daily['Full_Date'] <= end_date)]
-
-    # Group by 'Study' and sum the hours for the filtered DataFrame
-    df_study = df_filtered.groupby("Study")['Hours'].sum().reset_index()
+    # Group by 'Study' and sum the hours
+    df_study = df.groupby("Study")['Hours'].sum().reset_index()
 
     # Sort the DataFrame by Hours in descending order
     df_study = df_study.sort_values(by='Hours', ascending=False)
@@ -138,7 +126,7 @@ if not df.empty:
     if not df_study.empty:
         # Create a Plotly bar chart for total hours by study with a color palette
         fig_study = px.bar(df_study, x='Study', y='Hours', 
-                           title='Total Hours by Study (Last X Days)',
+                           title='Total Hours by Study',
                            labels={'Study': 'Study', 'Hours': 'Total Hours'},
                            text='Hours',  # Display hours on the bars
                            color='Hours',  # Color by hours
