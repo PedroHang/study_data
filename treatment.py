@@ -117,21 +117,6 @@ if not df.empty:
     else:
         st.warning("No data available for daily hours.")
 
-    # Get the last 15 days
-    last_15_days = datetime.now() - timedelta(days=15)
-    df_recent = df[df['Full_Date'] >= last_15_days]
-
-    # Group by 'Study' and sum the hours
-    df_study_recent = df_recent.groupby("Study")['Hours'].sum().reset_index()
-
-    # Sort the DataFrame by Hours in descending order and get the top 3 subjects
-    top_studies = df_study_recent.sort_values(by='Hours', ascending=False).head(3)
-
-    # Display metrics for the top 3 subjects
-    st.subheader("Top 3 Subjects Studied in the Last 15 Days")
-
-    for index, row in top_studies.iterrows():
-        st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
 
     # --- New Section for Visualization by Study ---
 
@@ -160,5 +145,21 @@ if not df.empty:
         st.plotly_chart(fig_study)
     else:
         st.warning("No data available for study breakdown.")
+
+    # Get the last 15 days
+    last_15_days = datetime.now() - timedelta(days=15)
+    df_recent = df[df['Full_Date'] >= last_15_days]
+
+    # Group by 'Study' and sum the hours
+    df_study_recent = df_recent.groupby("Study")['Hours'].sum().reset_index()
+
+    # Sort the DataFrame by Hours in descending order and get the top 3 subjects
+    top_studies = df_study_recent.sort_values(by='Hours', ascending=False).head(3)
+
+    # Display metrics for the top 3 subjects
+    st.subheader("Top 3 Subjects Studied in the Last 15 Days")
+
+    for index, row in top_studies.iterrows():
+        st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
 else:
     st.warning("No data fetched from the API.")
