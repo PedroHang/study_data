@@ -117,21 +117,34 @@ if not df.empty:
     else:
         st.warning("No data available for daily hours.")
 
-    # Get the last 15 days
-    last_15_days = datetime.now() - timedelta(days=15)
-    df_recent = df[df['Full_Date'] >= last_15_days]
+    st.subheader("🌟 Top 3 Subjects Studied in the Last 15 Days")
+
+    # Create three columns for side-by-side display
+    cols = st.columns(3)  # Create three columns
+
+    # Check if top_studies is not empty before proceeding
+    if not top_studies.empty:
+        for index, row in top_studies.iterrows():
+            with cols[index]:  # Use each column for a metric
+                st.markdown(
+                    f"""
+                    <div style="text-align: center;">
+                        <h3 style="color: #4a4a4a;">{row['Study']}</h3>
+                        <h2 style="color: #008080;">{row['Hours']:.2f} Hours</h2>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+    # --- New Section for Visualization by Study ---
+
+    st.subheader("Total Hours by Subject")
 
     # Group by 'Study' and sum the hours
-    df_study_recent = df_recent.groupby("Study")['Hours'].sum().reset_index()
+    df_study = df.groupby("Study")['Hours'].sum().reset_index()
 
-    # Sort the DataFrame by Hours in descending order and get the top 3 subjects
-    top_studies = df_study_recent.sort_values(by='Hours', ascending=False).head(3)
-
-    # Display metrics for the top 3 subjects
-    st.subheader("Top 3 Subjects Studied in the Last 15 Days")
-
-    for index, row in top_studies.iterrows():
-        st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
+    # Sort the DataFrame by Hours in descending order
+    df_study = df_study.sort_values(by='Hours', ascending=False)
 
     # --- New Section for Visualization by Study ---
 
