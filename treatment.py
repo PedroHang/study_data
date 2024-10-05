@@ -3,13 +3,14 @@ import pandas as pd
 import requests
 import base64
 from datetime import datetime, timedelta
+import streamlit_dataframe_editor as sde
 
 # Function to load CSV data from GitHub
 @st.cache_data
 def load_data():
     url = "https://raw.githubusercontent.com/PedroHang/study_data/main/df_cleaned.csv"
     df = pd.read_csv(url)
-    df.dropna(inplace=True)  # Remove NaN values
+    df.dropna(inplace=True)
     return df
 
 # Function to update the CSV file on GitHub
@@ -18,26 +19,20 @@ def update_csv(df):
     token = st.secrets["GITHUB_TOKEN"]
     message = "Update study hours"
     content = df.to_csv(index=False).encode("utf-8")
-
-    # Get the current file SHA to update
     response = requests.get(url, headers={"Authorization": f"token {token}"})
-    
+
     if response.status_code != 200:
-        st.error("Failed to get the file: " + response.json().get('message', ''))
+        st.error(f"Failed to get the file: {response.json().get('message', '')}")
         return False
 
     sha = response.json()["sha"]
-
-    # Create a payload for the PUT request
     payload = {
         "message": message,
         "content": base64.b64encode(content).decode("utf-8"),
         "sha": sha
     }
 
-    # Update the file on GitHub
     response = requests.put(url, headers={"Authorization": f"token {token}"}, json=payload)
-
     if response.ok:
         st.success("File updated successfully.")
     else:
@@ -45,56 +40,27 @@ def update_csv(df):
 
     return response.ok
 
-# Function to initialize missing dates
-def initialize_missing_dates(df):
-    # Convert 'Full_Date' to datetime format (handle flexible formats)
-    df['Full_Date'] = pd.to_datetime(df['Full_Date'], format='%Y-%m-%d', errors='coerce')
-
-    # Get all subjects
-    subjects = df['Study'].unique().tolist()
-
-    # Get the date range from the last date in the CSV until today
-    last_date = df['Full_Date'].max()
-    today = pd.to_datetime(datetime.today().strftime('%Y-%m-%d'))
-
-    # Create a list of dates from the last date to today
-    date_range = pd.date_range(start=last_date, end=today)
-
-    # Initialize missing dates for each subject with 0 study hours
-    new_rows = []
-    for date in date_range:
-        for subject in subjects:
-            if not ((df['Full_Date'] == date) & (df['Study'] == subject)).any():
-                new_rows.append({'Full_Date': date, 'Study': subject, 'Hours': 0})
-
-    # Add the new rows to the dataframe
-    if new_rows:
-        df = df.append(new_rows, ignore_index=True)
-
-    return df
+# Initialize session state to hold edited dataframe
+st.session_state = sde.initialize_session_state(st.session_state)
 
 # Load the data
 df = load_data()
 
-# Initialize missing dates with 0 hours for all subjects
-df = initialize_missing_dates(df)
-
-# Sort the dataframe by date (most recent first)
+# Sort the dataframe by date
 df['Full_Date'] = pd.to_datetime(df['Full_Date'], format='%Y-%m-%d')
 df = df.sort_values(by='Full_Date', ascending=False)
 
-# Display an editable DataFrame
-st.write("Edit Study Hours:")
-edited_df = st.data_editor(df, use_container_width=True)
+# Editable DataFrame
+st.session_state['dataframe_editor'] = sde.DataframeEditor(df_name='study_data', default_df_contents=df)
+st.session_state['dataframe_editor'].dataframe_editor()
 
-# Button to update the GitHub file
+# Button to save the changes
 if st.button("Save Changes"):
     # Update the CSV file on GitHub
-    if update_csv(edited_df):
+    if update_csv(st.session_state['study_data']):
         st.success("Changes saved and file updated successfully!")
     else:
         st.error("Failed to update the file on GitHub.")
-
-# Display the current DataFrame
-st.write("Current Study Hours:")
-st.dataframe(edited_df)
+    
+# Finalize session state to store edits
+st.session_state = sde.finalize_session_state(st.session_state)
