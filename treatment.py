@@ -159,14 +159,7 @@ if not df.empty:
     # Display metrics for the top 3 subjects
     st.subheader("Top 3 Subjects Studied in the Last 15 Days")
 
-    # Define a color palette for the metrics
-    colors = ['#FF5733', '#33FF57', '#3357FF']  # Example colors
-
     for index, row in top_studies.iterrows():
-        # Use HTML to format the metric with a custom color
-        st.markdown(
-            f"<div style='color: {colors[index]}; font-size: 24px; font-weight: bold;'>{row['Study']}: {row['Hours']:.2f} Hours</div>",
-            unsafe_allow_html=True
-        )
+        st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
 else:
     st.warning("No data fetched from the API.")
