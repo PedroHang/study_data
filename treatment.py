@@ -15,7 +15,7 @@ def load_data():
 # Function to update the CSV file on GitHub
 def update_csv(df):
     url = "https://api.github.com/repos/PedroHang/study_data/contents/clean_data.csv"
-    token = st.secrets["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"]  # Store your GitHub token in Streamlit secrets
+    token = st.secrets["GITHUB_TOKEN"]  # Store your GitHub token in Streamlit secrets
     message = "Update study hours"
     content = df.to_csv(index=False).encode("utf-8")
     
@@ -31,7 +31,7 @@ def update_csv(df):
     # Create a payload for the PUT request
     payload = {
         "message": message,
-        "content": base64.b64encode(content.encode("utf-8")).decode("utf-8"),
+        "content": base64.b64encode(content).decode("utf-8"),
         "sha": sha
     }
     
@@ -76,7 +76,8 @@ if st.button("Add Hours"):
     # Ensure all subjects for the selected date are set to 0 if not present
     for subject in subjects:
         if subject not in df['Study'][df['Date'] == date_str].values:
-            df = df.append({'Study': subject, 'Date': date_str, 'Hours': 0}, ignore_index=True)
+            new_row = pd.DataFrame({'Study': [subject], 'Date': [date_str], 'Hours': [0]})
+            df = pd.concat([df, new_row], ignore_index=True)
 
     # Update the CSV file on GitHub
     if update_csv(df):
