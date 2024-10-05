@@ -35,14 +35,18 @@ if not df.empty:
     # Group by 'Full_Date' and sum the hours
     df_daily = df.groupby("Full_Date")['Hours'].sum().reset_index()
 
-    # Calculate the 7-day rolling standard deviation and weekly rolling average
+    # Calculate the 7-day rolling standard deviation
     df_daily['Rolling Volatility'] = df_daily['Hours'].rolling(window=7).std()
-    df_daily['Weekly Average'] = df_daily['Hours'].rolling(window=7).mean()  # Weekly rolling average
+
+    # Calculate the weekly average starting from Monday
+    df_daily['Full_Date'] = pd.to_datetime(df_daily['Full_Date'])
+    df_daily['Week'] = df_daily['Full_Date'].dt.to_period('W').apply(lambda r: r.start_time)  # Get the start date of the week
+    df_weekly = df_daily.groupby('Week')['Hours'].mean().reset_index()
 
     # Check if df_daily is not empty before plotting
     if not df_daily.empty:
-        # Toggle between Total Hours and Rolling Volatility
-        plot_option = st.selectbox("Select Plot Type:", ("Total Hours", "Rolling Volatility"))
+        # Toggle between Total Hours, Rolling Volatility, and Weekly Average
+        plot_option = st.selectbox("Select Plot Type:", ("Total Hours", "Rolling Volatility", "Weekly Average"))
 
         if plot_option == "Total Hours":
             # Create a Plotly line chart for total hours per day
@@ -51,12 +55,8 @@ if not df.empty:
                           labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
                           markers=True)
 
-            # Add the weekly rolling average line
-            fig.add_scatter(x=df_daily['Full_Date'], y=df_daily['Weekly Average'],
-                             mode='lines', name='Weekly Average', line=dict(width=2, color='red'))  # Change to red
-
             # Update layout for wider dimensions and improve aesthetics
-            fig.update_traces(line=dict(width=4, color='orange'),  # Set line width and color for total hours
+            fig.update_traces(line=dict(width=4, color='royalblue'),  # Set line width and color
                               marker=dict(size=8, symbol='circle'))  # Set marker size and shape
             fig.update_layout(title_font=dict(size=24),  # Title font size
                               xaxis_title_font=dict(size=18),  # X-axis title font size
@@ -75,7 +75,7 @@ if not df.empty:
                                      markers=True)
 
             # Update layout for wider dimensions and improve aesthetics
-            fig_volatility.update_traces(line=dict(width=4, color='royalblue'),  # Set line width and color
+            fig_volatility.update_traces(line=dict(width=4, color='orange'),  # Set line width and color
                                          marker=dict(size=8, symbol='circle'))  # Set marker size and shape
             fig_volatility.update_layout(title_font=dict(size=24),  # Title font size
                                           xaxis_title_font=dict(size=18),  # X-axis title font size
@@ -85,6 +85,26 @@ if not df.empty:
 
             # Show the Plotly chart in Streamlit
             st.plotly_chart(fig_volatility)
+
+        elif plot_option == "Weekly Average":
+            # Create a Plotly line chart for weekly average
+            fig_weekly = px.line(df_weekly, x='Week', y='Hours',
+                                 title='Weekly Average Study Hours',
+                                 labels={'Week': 'Week Start Date', 'Hours': 'Average Hours'},
+                                 markers=True)
+
+            # Update layout for wider dimensions and improve aesthetics
+            fig_weekly.update_traces(line=dict(width=4, color='green'),  # Set line width and color
+                                     marker=dict(size=8, symbol='circle'))  # Set marker size and shape
+            fig_weekly.update_layout(title_font=dict(size=24),  # Title font size
+                                      xaxis_title_font=dict(size=18),  # X-axis title font size
+                                      yaxis_title_font=dict(size=18),  # Y-axis title font size
+                                      legend=dict(title_font=dict(size=16), font=dict(size=14)),  # Legend font size
+                                      width=1800, height=600)  # Update dimensions
+
+            # Show the Plotly chart in Streamlit
+            st.plotly_chart(fig_weekly)
+
     else:
         st.warning("No data available for daily hours.")
 
