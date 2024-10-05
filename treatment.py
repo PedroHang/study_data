@@ -47,26 +47,29 @@ def update_csv(df):
 
 # Function to initialize missing dates
 def initialize_missing_dates(df):
+    # Convert 'Full_Date' to datetime format (handle flexible formats)
+    df['Full_Date'] = pd.to_datetime(df['Full_Date'], format='%Y-%m-%d', errors='coerce')
+
+    # Get all subjects
     subjects = df['Study'].unique().tolist()
 
-    # Convert 'Full-Date' to datetime format
-    df['Full_Date'] = pd.to_datetime(df['Full_Date'], format='%m/%d/%Y')
-    
     # Get the date range from the last date in the CSV until today
     last_date = df['Full_Date'].max()
-    today = pd.to_datetime(datetime.today().strftime('%m/%d/%Y'))
+    today = pd.to_datetime(datetime.today().strftime('%Y-%m-%d'))
 
-    date_range = pd.date_range(start=last_date + timedelta(days=1), end=today)
+    # Create a list of dates from the last date to today
+    date_range = pd.date_range(start=last_date, end=today)
 
-    # Create missing entries for each subject and date in the date range
+    # Initialize missing dates for each subject with 0 study hours
+    new_rows = []
     for date in date_range:
-        date_str = date.strftime('%m/%d/%Y')
         for subject in subjects:
-            if not df[(df['Full_Date'] == date) & (df['Study'] == subject)].empty:
-                continue
-            # Append the missing entry with 0 hours
-            new_row = pd.DataFrame({'Study': [subject], 'Full_Date': [date_str], 'Hours': [0]})
-            df = pd.concat([df, new_row], ignore_index=True)
+            if not ((df['Full_Date'] == date) & (df['Study'] == subject)).any():
+                new_rows.append({'Full_Date': date, 'Study': subject, 'Hours': 0})
+
+    # Add the new rows to the dataframe
+    if new_rows:
+        df = df.append(new_rows, ignore_index=True)
 
     return df
 
@@ -77,7 +80,7 @@ df = load_data()
 df = initialize_missing_dates(df)
 
 # Sort the dataframe by date (most recent first)
-df['Full_Date'] = pd.to_datetime(df['Full_Date'], format='%m/%d/%Y')
+df['Full_Date'] = pd.to_datetime(df['Full_Date'], format='%Y-%m-%d')
 df = df.sort_values(by='Full_Date', ascending=False)
 
 # Display an editable DataFrame
