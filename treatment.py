@@ -18,10 +18,10 @@ def fetch_data():
         return []
 
 # Streamlit UI
-st.title("My Daily Study Routine")
+st.title("📚 My Daily Study Routine")
 
 # Button to refresh data
-if st.button("Refresh Data"):
+if st.button("🔄 Refresh Data"):
     data = fetch_data()
     df = pd.DataFrame(data)
 else:
@@ -46,11 +46,22 @@ if not df.empty:
     # Sort the DataFrame by Hours in descending order and get the top 3 subjects
     top_studies = df_study_recent.sort_values(by='Hours', ascending=False).head(3)
 
-    # Display metrics for the top 3 subjects
-    st.subheader("Top 3 Subjects Studied in the Last 15 Days")
+    # Display metrics for the top 3 subjects in columns
+    st.subheader("🌟 Top 3 Subjects Studied in the Last 15 Days")
+
+    cols = st.columns(3)  # Create three columns
 
     for index, row in top_studies.iterrows():
-        st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
+        with cols[index]:  # Use each column for a card
+            st.markdown(
+                f"""
+                <div style="background-color: #f0f8ff; padding: 20px; border-radius: 10px; text-align: center;">
+                    <h2 style="color: #4a4a4a;">{row['Study']}</h2>
+                    <h3 style="color: #008080;">{row['Hours']:.2f} Hours</h3>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
     # Continue with your existing charts and analysis...
     # Group by 'Full_Date' and sum the hours
@@ -69,7 +80,7 @@ if not df.empty:
     # Check if df_daily is not empty before plotting
     if not df_daily.empty:
         # Toggle between Total Hours, Rolling Volatility, and Weekly Average
-        plot_option = st.selectbox("Select Plot Type:", ("Total Hours", "Rolling Volatility", "Weekly Average"))
+        plot_option = st.selectbox("📊 Select Plot Type:", ("Total Hours", "Rolling Volatility", "Weekly Average"))
 
         if plot_option == "Total Hours":
             # Create a Plotly line chart for total hours per day
@@ -134,7 +145,7 @@ if not df.empty:
 
     # --- New Section for Visualization by Study ---
 
-    st.subheader("Total Hours by Subject")
+    st.subheader("📈 Total Hours by Subject")
 
     # Group by 'Study' and sum the hours
     df_study = df.groupby("Study")['Hours'].sum().reset_index()
