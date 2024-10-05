@@ -50,8 +50,14 @@ if not df.empty:
                           labels={'Full_Date': 'Date', 'Hours': 'Total Hours'},
                           markers=True)
 
-            # Update layout for wider dimensions
-            fig.update_layout(width=1800)
+            # Update layout for wider dimensions and improve aesthetics
+            fig.update_traces(line=dict(width=4, color='royalblue'),  # Set line width and color
+                              marker=dict(size=8, symbol='circle'))  # Set marker size and shape
+            fig.update_layout(title_font=dict(size=24),  # Title font size
+                              xaxis_title_font=dict(size=18),  # X-axis title font size
+                              yaxis_title_font=dict(size=18),  # Y-axis title font size
+                              legend=dict(title_font=dict(size=16), font=dict(size=14)),  # Legend font size
+                              width=1800, height=600)  # Update dimensions
 
             # Show the Plotly chart in Streamlit
             st.plotly_chart(fig)
@@ -63,8 +69,14 @@ if not df.empty:
                                      labels={'Full_Date': 'Date', 'Rolling Volatility': 'Volatility'},
                                      markers=True)
 
-            # Update layout for wider dimensions
-            fig_volatility.update_layout(width=1800)
+            # Update layout for wider dimensions and improve aesthetics
+            fig_volatility.update_traces(line=dict(width=4, color='orange'),  # Set line width and color
+                                         marker=dict(size=8, symbol='circle'))  # Set marker size and shape
+            fig_volatility.update_layout(title_font=dict(size=24),  # Title font size
+                                          xaxis_title_font=dict(size=18),  # X-axis title font size
+                                          yaxis_title_font=dict(size=18),  # Y-axis title font size
+                                          legend=dict(title_font=dict(size=16), font=dict(size=14)),  # Legend font size
+                                          width=1800, height=600)  # Update dimensions
 
             # Show the Plotly chart in Streamlit
             st.plotly_chart(fig_volatility)
