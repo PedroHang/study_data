@@ -7,12 +7,11 @@ from datetime import datetime, timedelta
 API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTVLP5IFZY9R2CTS4Ld9yFm9ymyAyTcW5IK_aVjmAqWPhrNmg5jWAzPgqd1ziVBqu3QEqL0Y4rpjF2/pub?output=csv"
 st.set_page_config(layout="wide")
 
-# Custom CSS to set background color
 st.markdown(
     """
     <style>
     .reportview-container {
-        background-color: #f0f0f5;  /* Change to your desired color */
+        background: url("https://img.freepik.com/free-vector/hand-drawn-back-school-background_23-2149464866.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1728172800&semt=ais_hybrid")
     }
     </style>
     """,
