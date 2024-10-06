@@ -170,7 +170,7 @@ if not df.empty:
 
     ######################################
 
-    st.markdown(f"<h3 style='text-align: center; font-size: 18px;'>Total Hours Studied Today</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='text-align: center; font-size: 50px; margin-top: 40px;'>Insights</h3>", unsafe_allow_html=True)
 
 
     # Add a new column for the day of the week
