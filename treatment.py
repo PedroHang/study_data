@@ -232,6 +232,7 @@ if not df.empty:
     st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 5px;'>Time of the Day Breakdown ☀️</h3>", unsafe_allow_html=True)
 
     # Create columns for the two donut charts
+    tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
     col1, col2 = st.columns(2)
 
   
@@ -243,7 +244,6 @@ if not df.empty:
     }
 
     # Radio button for selecting time of day
-    tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
 
     # Content for col1
     with col1:
