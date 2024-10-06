@@ -7,21 +7,17 @@ from datetime import datetime, timedelta
 API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTVLP5IFZY9R2CTS4Ld9yFm9ymyAyTcW5IK_aVjmAqWPhrNmg5jWAzPgqd1ziVBqu3QEqL0Y4rpjF2/pub?output=csv"
 st.set_page_config(layout="wide")
 
-# Custom background color with a full container
-st.markdown(
-    """
+# Define your custom style
+style = """
     <style>
-    .main {
-        background-color: #f0f0f0;  /* Change this to your desired color */
-        padding: 20px;  /* Add some padding if needed */
+    body {
+        background-color: #ADD8E6;  # Replace with your desired color
     }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+"""
 
-# Wrapping the content in a div with the class 'main'
-st.markdown('<div class="main">', unsafe_allow_html=True)
+# Apply the style
+st.markdown(style, unsafe_allow_html=True)
 
 def fetch_data():
     try:
@@ -357,4 +353,3 @@ if not df.empty:
 else:
     st.write("No data available.")
 
-st.markdown('</div>', unsafe_allow_html=True)
