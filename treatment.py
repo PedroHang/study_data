@@ -143,36 +143,40 @@ if not df.empty:
         st.metric(label="Started on", value="2024-05-12")
         st.metric(label="No study days", value=f"{days_without_study} Days")
     
-    # Add a new column for the day of the week
+        # Add a new column for the day of the week
     df['Day_of_Week'] = df['Full_Date'].dt.day_name()  # Get the name of the day
 
-    # Calculate total hours and count of occurrences for each day of the week
-    df_weekday_stats = df.groupby('Day_of_Week').agg(
-        Total_Hours=('Hours', 'sum'),
-        Count=('Hours', 'count')
-    ).reset_index()
+    # Calculate total hours for each day of the week
+    total_hours_per_weekday = df.groupby('Day_of_Week')['Hours'].sum().reset_index()
 
-    # Calculate average hours for each day
-    df_weekday_stats['Average_Hours'] = df_weekday_stats['Total_Hours'] / df_weekday_stats['Count']
+    # Calculate the number of unique study days for each day of the week
+    unique_days_per_weekday = df.groupby('Day_of_Week')['Full_Date'].nunique().reset_index()
+
+    # Merge the two DataFrames
+    average_hours_per_weekday = pd.merge(total_hours_per_weekday, unique_days_per_weekday, on='Day_of_Week')
+    average_hours_per_weekday.columns = ['Day_of_Week', 'Total_Hours', 'Unique_Days']
+
+    # Calculate the average hours for each day of the week
+    average_hours_per_weekday['Average_Hours'] = average_hours_per_weekday['Total_Hours'] / average_hours_per_weekday['Unique_Days']
 
     # Reorder the DataFrame to ensure days are in the correct order
     days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    df_weekday_stats['Day_of_Week'] = pd.Categorical(df_weekday_stats['Day_of_Week'], categories=days_order, ordered=True)
-    df_weekday_stats = df_weekday_stats.sort_values('Day_of_Week')
+    average_hours_per_weekday['Day_of_Week'] = pd.Categorical(average_hours_per_weekday['Day_of_Week'], categories=days_order, ordered=True)
+    average_hours_per_weekday = average_hours_per_weekday.sort_values('Day_of_Week')
 
     # Create the bar plot for historic average study hours by day of the week
-    fig_weekday_avg = px.bar(df_weekday_stats, x='Day_of_Week', y='Average_Hours',
-                             title='Average Study Hours by Day of the Week',
-                             labels={'Day_of_Week': 'Day of the Week', 'Average_Hours': 'Average Hours'},
-                             text='Average_Hours',
-                             color='Average_Hours',
-                             color_continuous_scale=px.colors.sequential.Viridis)
+    fig_weekday_avg = px.bar(average_hours_per_weekday, x='Day_of_Week', y='Average_Hours',
+                            title='Average Study Hours by Day of the Week',
+                            labels={'Day_of_Week': 'Day of the Week', 'Average_Hours': 'Average Hours'},
+                            text='Average_Hours',
+                            color='Average_Hours',
+                            color_continuous_scale=px.colors.sequential.Viridis)
 
     fig_weekday_avg.update_layout(title_font=dict(size=24),
-                                   xaxis_title_font=dict(size=18),
-                                   yaxis_title_font=dict(size=18),
-                                   legend=dict(title_font=dict(size=16), font=dict(size=14)),
-                                   width=1300, height=470)
+                                xaxis_title_font=dict(size=18),
+                                yaxis_title_font=dict(size=18),
+                                legend=dict(title_font=dict(size=16), font=dict(size=14)),
+                                width=1800, height=600)
 
     # Display the plot in the Streamlit app
     st.plotly_chart(fig_weekday_avg)
