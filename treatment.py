@@ -169,43 +169,23 @@ if not df.empty:
 
 
     ######################################
-
-        # Centralized title for both donut charts
-    st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 40px;'>Time of the Day Breakdown</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='text-align: center; font-size: 45px; margin-top: 60px;'>Insights</h3>", unsafe_allow_html=True)
 
     # Add a margin top of 40px
     st.markdown('<div style="margin-top: 40px;"></div>', unsafe_allow_html=True)
 
-    # CSS for smaller slider and switch
-    st.markdown(
-        """
-        <style>
-        .stSlider > div { 
-            margin-top: -20px; 
-            margin-bottom: -15px;
-        }
-        .stRadio > label, .stSlider > label {
-            font-size: 16px;
-            margin-bottom: -15px;
-        }
-        </style>
-        """, 
-        unsafe_allow_html=True
-    )
+    # Create a centralized title for both charts
+    st.markdown(f"<h2 style='text-align: center; font-size: 30px; margin-top: 20px;'>Time of the Day Breakdown</h2>", unsafe_allow_html=True)
 
     # Create columns for the two donut charts
     col1, col2 = st.columns(2)
 
     # Content for col1
     with col1:
-        # Add margin top for donut chart
-        st.markdown('<div style="margin-top: 20px;"></div>', unsafe_allow_html=True)
-
         # Input for custom "Last X Days"
         last_x_days = st.slider("Select the number of days for the recent period:", min_value=1, max_value=365, value=30)
         last_x_days_date = datetime.now() - timedelta(days=last_x_days)
 
-        # Disclaimer for time of day recording
         st.markdown(f"<h3 style='font-size: 12px;'>Disclaimer: The Time of the Day started being recorded on 2024-10-05</h3>", unsafe_allow_html=True)
 
         # Switch for entire period or custom range
@@ -243,9 +223,9 @@ if not df.empty:
             marker=dict(line=dict(color='#000000', width=1.5))  # Add a border for better visibility
         )
 
-        # Update layout for the legend and labels (no chart title)
+        # Update layout for the legend and labels
         fig_tod.update_layout(
-            title=None,
+            title_font=dict(size=24),
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -253,8 +233,8 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
-            width=650,  # Smaller width
-            height=550  # Smaller height
+            width=600,
+            height=500
         )
 
         # Display the donut chart
@@ -262,9 +242,6 @@ if not df.empty:
 
     # Content for col2
     with col2:
-        # Add margin top for donut chart
-        st.markdown('<div style="margin-top: 90px;"></div>', unsafe_allow_html=True)
-
         # Switch for Morning, Afternoon, or Night
         tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
 
@@ -274,20 +251,21 @@ if not df.empty:
         # Group by 'Study' and sum the 'Hours' for the selected time of day
         df_subject = df_filtered_tod.groupby('Study')['Hours'].sum().reset_index()
 
-        # Create a donut chart for subject distribution
-        # Use variations of the same colors from col1 for better visual consistency
-        subject_colors = {
-            "Morning": "#FFB07A",  # Lighter Salmon
-            "Afternoon": "#66CDAA",  # Medium Aquamarine
-            "Night": "#9370DB"  # Medium Purple
+        # Define color shades based on selected time of day
+        color_palettes = {
+            "Morning": px.colors.sequential.Sunset,
+            "Afternoon": px.colors.sequential.Teal,
+            "Night": px.colors.sequential.Purples
         }
 
+        # Create a donut chart for subject distribution
         fig_subject = px.pie(
             df_subject,
             values='Hours',
             names='Study',
             hole=0.4,
-            color_discrete_sequence=[subject_colors[tod_selected]] * len(df_subject)  # Apply color variation based on selected time of day
+            color='Study',
+            color_discrete_sequence=color_palettes[tod_selected]
         )
 
         # Update the traces for labels and legend
@@ -297,9 +275,9 @@ if not df.empty:
             marker=dict(line=dict(color='#000000', width=1.5))  # Add a border for better visibility
         )
 
-        # Update layout for the legend and labels (no chart title)
+        # Update layout for the legend and labels
         fig_subject.update_layout(
-            title=None,
+            title_font=dict(size=24),
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -307,13 +285,12 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
-            width=650,  # Smaller width
-            height=550  # Smaller height
+            width=600,
+            height=500
         )
 
         # Display the donut chart
         st.plotly_chart(fig_subject)
-
 
 
 
