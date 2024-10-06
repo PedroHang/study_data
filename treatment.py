@@ -244,7 +244,6 @@ if not df.empty:
 
     # Content for col1
     with col1:
-        st.write("")  # Add an empty line for spacing
 
         # Group by 'Tod' and sum the 'Hours'
         df_tod = df_filtered.groupby('Tod')['Hours'].sum().reset_index()
