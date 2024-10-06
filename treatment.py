@@ -101,10 +101,10 @@ if not df.empty:
 
     st.subheader("Top 3 Subjects Studied in the Last 15 Days")
         # Create columns for the top studies
-    col1, col2, col3 = st.columns(3)
+    colu1, colu2, colu3 = st.columns(3)
 
     # Use an array to store the columns
-    columns = [col1, col2, col3]
+    columns = [colu1, colu2, colu3]
 
     for index, row in top_studies.iterrows():
         with columns[index]:  # Assign each row to a specific column
