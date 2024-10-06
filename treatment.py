@@ -291,6 +291,25 @@ if not df.empty:
     # Content for col2
     with col2:
         # Switch for Morning, Afternoon, or Night
+        # CSS to make the radio button smaller and display options side by side
+        st.markdown(
+            """
+            <style>
+            div[data-baseweb="radio"] {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            div[data-baseweb="radio"] > div {
+                margin-right: 10px; /* Add spacing between options */
+                font-size: 16px;  /* Reduce font size for smaller appearance */
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+        # Switch for Morning, Afternoon, or Night with options side by side and smaller
         tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
 
         # Filter data based on the selected time of day
