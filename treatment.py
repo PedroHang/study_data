@@ -8,12 +8,14 @@ API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTVLP5IFZY9R2CTS4Ld9
 st.set_page_config(layout="wide")
 
 def fetch_data():
-    response = requests.get(API_URL)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        st.error(f"Failed to fetch data. Status code: {response.status_code}")
-        return []
+    try:
+        # Read the Google Sheets CSV directly into a DataFrame
+        df = pd.read_csv(API_URL)
+        return df
+    except Exception as e:
+        st.error(f"Failed to fetch data: {e}")
+        return pd.DataFrame()
+
 
 st.title("My Daily Study Routine")
 
