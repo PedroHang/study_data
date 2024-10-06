@@ -283,7 +283,7 @@ if not df.empty:
             ),
             title="Distribution of Study Hours by Time of Day",  # Add chart title
             title_font=dict(size=25),  # Set title font size
-            title_x=0.5,  # Center the title
+            title_x=0.1,  # Center the title
             width=650,
             height=550
         )
