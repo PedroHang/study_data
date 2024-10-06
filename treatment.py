@@ -219,9 +219,10 @@ if not df.empty:
     # Add a margin top of 40px
     st.markdown('<div style="margin-top: 40px;"></div>', unsafe_allow_html=True)
 
-    # Create columns for the donut chart and the total hours card
+        # Create columns for the two donut charts
     col1, col2 = st.columns(2)
 
+    # Content for col1
     with col1:
         # Input for custom "Last X Days"
         last_x_days = st.slider("Select the number of days for the recent period:", min_value=1, max_value=365, value=30)
@@ -281,7 +282,49 @@ if not df.empty:
         # Display the donut chart
         st.plotly_chart(fig_tod)
 
-    # Now you can use col2 for other content as needed
+    # Content for col2
+    with col2:
+        # Switch for Morning, Afternoon, or Night
+        tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
+
+        # Filter data based on the selected time of day
+        df_filtered_tod = df_filtered[df_filtered['Tod'] == tod_selected]
+
+        # Group by 'Study' and sum the 'Hours' for the selected time of day
+        df_subject = df_filtered_tod.groupby('Study')['Hours'].sum().reset_index()
+
+        # Create a donut chart for subject distribution
+        fig_subject = px.pie(
+            df_subject,
+            values='Hours',
+            names='Study',
+            title=f"Study Hours by Subject during {tod_selected} ({date_filter})",
+            hole=0.4
+        )
+
+        # Update the traces for labels and legend
+        fig_subject.update_traces(
+            textinfo='label+percent+value',  # Show label, percent, and hours
+            textfont_size=16,  # Increase the label font size
+            marker=dict(line=dict(color='#000000', width=1.5))  # Add a border for better visibility
+        )
+
+        # Update layout for the legend and labels
+        fig_subject.update_layout(
+            title_font=dict(size=24),
+            legend=dict(
+                font=dict(size=14),  # Increase legend font size
+                yanchor="top",
+                y=1.05,
+                xanchor="right",
+                x=1.3
+            ),
+            width=700,
+            height=600
+        )
+
+        # Display the donut chart
+        st.plotly_chart(fig_subject)
 
         
 
