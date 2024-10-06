@@ -100,8 +100,15 @@ if not df.empty:
     top_studies = df_study_recent.sort_values(by='Hours', ascending=False).head(3)
 
     st.subheader("Top 3 Subjects Studied in the Last 15 Days")
+        # Create columns for the top studies
+    col1, col2, col3 = st.columns(3)
+
+    # Use an array to store the columns
+    columns = [col1, col2, col3]
+
     for index, row in top_studies.iterrows():
-        st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
+        with columns[index]:  # Assign each row to a specific column
+            st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
 
     total_hours = df['Hours'].sum()
     days_equivalent = total_hours / 24
@@ -141,6 +148,6 @@ if not df.empty:
 
     with col4:
         st.metric(label="Started on", value="2024-05-12")
-        st.metric(label="Days Without Study", value=f"{days_without_study} Days")
+        st.metric(label="No study days", value=f"{days_without_study} Days")
 else:
     st.warning("No data fetched from the API.")
