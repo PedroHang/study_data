@@ -311,7 +311,7 @@ if not df.empty:
         fig_subject.update_traces(
             textinfo='label+percent+value',  # Show label, percent, and hours
             textfont_size=16,  # Increase the label font size
-            marker=dict(line=dict(color='#000000', width=1.5))  # Add a border for better visibility
+            marker=dict(line=dict(color='#000000', width=1.0))  # Add a border for better visibility
         )
 
         # Update layout for the legend and labels
