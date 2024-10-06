@@ -229,7 +229,7 @@ if not df.empty:
 
     # Add margin top for the donut charts
 
-    st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 10px;'>Time of the Day Breakdown ☀️</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 5px;'>Time of the Day Breakdown ☀️</h3>", unsafe_allow_html=True)
 
     # Create columns for the two donut charts
     col1, col2 = st.columns(2)
@@ -273,6 +273,7 @@ if not df.empty:
 
         # Update layout for the legend and labels
         fig_tod.update_layout(
+            margin=dict(t=30, l=10, r=10, b=10),  # Add top margin, adjust others if needed
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -280,6 +281,9 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
+            title="Distribution of Study Hours by Time of Day",  # Add chart title
+            title_font=dict(size=10),  # Set title font size
+            title_x=0.5,  # Center the title
             width=650,
             height=550
         )
@@ -316,6 +320,7 @@ if not df.empty:
 
         # Update layout for the legend and labels
         fig_subject.update_layout(
+            margin=dict(t=30, l=10, r=10, b=10),  # Add top margin, adjust others if needed
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -323,6 +328,9 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
+            title=f"Study Hours for {tod_selected}",  # Add chart title for the selected time of day
+            title_font=dict(size=10),  # Set title font size
+            title_x=0.5,  # Center the title
             width=650,
             height=550
         )
