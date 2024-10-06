@@ -7,6 +7,17 @@ from datetime import datetime, timedelta
 API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTVLP5IFZY9R2CTS4Ld9yFm9ymyAyTcW5IK_aVjmAqWPhrNmg5jWAzPgqd1ziVBqu3QEqL0Y4rpjF2/pub?output=csv"
 st.set_page_config(layout="wide")
 
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background-color: #f0f0f0;  /* Change this to your desired color */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 def fetch_data():
     try:
         # Read the Google Sheets CSV directly into a DataFrame
@@ -229,7 +240,7 @@ if not df.empty:
 
     # Add margin top for the donut charts
 
-    st.markdown(f"<h3 style='font-size: 30px; margin-top: 5px;'>Time of the Day Breakdown ☀️</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='font-size: 35px; margin-top: 5px;'>Time of the Day Breakdown ☀️</h3>", unsafe_allow_html=True)
 
     # Create columns for the two donut charts
     tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
