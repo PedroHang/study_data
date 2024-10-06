@@ -214,12 +214,15 @@ if not df.empty:
     )
     st.plotly_chart(fig_avg_weekday)
 
-        # Filter for the last 30 days or the entire period
-    last_30_days = datetime.now() - timedelta(days=30)
-    date_filter = st.radio("Select Time Period", ("Last 30 Days", "Entire Period"))
+        # Input for custom "Last X Days"
+    last_x_days = st.slider("Select the number of days for the recent period:", min_value=1, max_value=365, value=30)
+    last_x_days_date = datetime.now() - timedelta(days=last_x_days)
 
-    if date_filter == "Last 30 Days":
-        df_filtered = df[df['Full_Date'] >= last_30_days]
+    # Switch for entire period or custom range
+    date_filter = st.radio("Select Time Period", (f"Last {last_x_days} Days", "Entire Period"))
+
+    if date_filter == f"Last {last_x_days} Days":
+        df_filtered = df[df['Full_Date'] >= last_x_days_date]
     else:
         df_filtered = df
 
@@ -244,14 +247,24 @@ if not df.empty:
         color_discrete_map=tod_colors
     )
 
+    # Update the traces for labels and legend
     fig_tod.update_traces(
-        textinfo='label+percent+value',  # Display labels, percentage, and total hours
-        showlegend=True
+        textinfo='label+percent+value',  # Show label, percent, and hours
+        textfont_size=16,  # Increase the label font size
+        marker=dict(line=dict(color='#000000', width=1.5))  # Add a border for better visibility
     )
 
+    # Update layout for the legend and labels
     fig_tod.update_layout(
-        title_font=dict(size=40),
-        width=600,
+        title_font=dict(size=24),
+        legend=dict(
+            font=dict(size=14),  # Increase legend font size
+            yanchor="top",
+            y=1.05,
+            xanchor="right",
+            x=1.3
+        ),
+        width=700,
         height=600
     )
 
