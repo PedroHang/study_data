@@ -134,7 +134,7 @@ if not df.empty:
 
     with col3:
         st.metric(label="Record Day", value=f"{record_hours:.2f} Hours", delta=f"On {record_date}")
-        st.metric(label="Days Without Study", value=f"{days_without_study}", delta=f"-{days_without_study}", delta_color="inverse")
+        st.metric(label="Days Without Study", value=f"{days_without_study}", delta=f"-{days_without_study}", delta_color="red")
 
     with col4:
         st.metric(label="Started on", value="2024-05-12")
