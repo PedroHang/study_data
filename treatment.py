@@ -331,7 +331,7 @@ if not df.empty:
             ),
             title=f"Study Hours for {tod_selected}",  # Add chart title for the selected time of day
             title_font=dict(size=25),  # Set title font size
-            title_x=0.5,  # Center the title
+            title_x=0.1,  # Center the title
             width=650,
             height=550
         )
