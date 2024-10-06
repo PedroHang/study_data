@@ -50,6 +50,23 @@ if not df.empty:
     # Format the average hours to 2 decimal points
     df_weekly['Hours'] = df_weekly['Hours'].round(2)
 
+    # --- Longest Study Streak Calculation ---
+
+    # Sort by date and check for consecutive days where hours > 0
+    df_daily = df_daily.sort_values(by='Full_Date')
+    df_daily['Studied'] = df_daily['Hours'] > 0
+
+    # Calculate difference between consecutive dates
+    df_daily['Day_Diff'] = df_daily['Full_Date'].diff().dt.days.fillna(1)
+
+    # Check if the difference between consecutive days is 1 and hours were studied on that day
+    df_daily['Is_Consecutive'] = (df_daily['Day_Diff'] == 1) & df_daily['Studied']
+
+    # Create streak groups and calculate the maximum streak
+    df_daily['Streak_Group'] = (~df_daily['Is_Consecutive']).cumsum()
+    df_streaks = df_daily[df_daily['Studied']].groupby('Streak_Group').size().reset_index(name='Streak_Length')
+    max_streak = df_streaks['Streak_Length'].max()
+
     # Check if df_daily is not empty before plotting
     if not df_daily.empty:
         # Toggle between Total Hours, Rolling Volatility, and Weekly Average
@@ -166,33 +183,13 @@ if not df.empty:
     total_hours = df['Hours'].sum()
     days_equivalent = total_hours / 24
 
-        # Calculate the maximum hours for a single day
+    # Calculate the maximum hours for a single day
     max_hours_day = df_daily.loc[df_daily['Hours'].idxmax()]
 
-    # Extract the date and hours for the day with the maximum hours
-    record_hours = max_hours_day['Hours']
-    record_date = max_hours_day['Full_Date'].strftime("%Y-%m-%d")  # Format date to a readable format
-
-    # Display the total hours studied with color using Markdown (or HTML)
-    st.markdown("<h3 style='color: lightblue; font-family: Arial; margin-top: 40px'>- Total Hours Studied -</h3>", unsafe_allow_html=True)
-
-
-    # Create two columns for metrics
-    col1, col2, col3, col4 = st.columns(4)
-
-    # Display the total hours and days equivalent side by side
-    with col1:
-        st.metric(label="Total Hours", value=f"{total_hours:.2f} Hours")
-        st.metric(label="Total time (in days)", value=f"{days_equivalent:.2f} Days")
-
-    with col2:
-        st.metric(label="Total time (in days)", value=f"{days_equivalent:.2f} Days")
-
-    with col3:
-        st.metric(label="Record Day", value=f"{record_hours:.2f} Hours", delta=f"On {record_date}")
-
-    with col4:
-        st.metric(label="Started on", value="2024-05-12")
-
+    # Display metrics for the longest study streak, total hours, and max hours on a day
+    st.metric(label="Longest Study Streak", value=f"{max_streak} Days")
+    st.metric(label="Total Hours Studied", value=f"{total_hours:.2f} Hours")
+    st.metric(label="Total Study Time in Days", value=f"{days_equivalent:.2f} Days")
+    st.metric(label="Max Hours in a Single Day", value=f"{max_hours_day['Hours']:.2f} Hours", delta=f"{max_hours_day['Full_Date'].strftime('%Y-%m-%d')}")
 else:
-    st.warning("No data fetched from the API.")
+    st.warning("No data available.")
