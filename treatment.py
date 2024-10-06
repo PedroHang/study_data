@@ -244,7 +244,7 @@ if not df.empty:
 
     # Content for col1
     with col1:
-        st.markdown("<h3 style='margin-top: 100px;'>Study Hours Distribution by Time of Day</h3>", unsafe_allow_html=True)  # Streamlit title with top margin
+        st.markdown("<h3 style='margin-top: 150px;'>Study Hours Distribution by Time of Day</h3>", unsafe_allow_html=True)  # Streamlit title with top margin
         
         # Group by 'Tod' and sum the 'Hours'
         df_tod = df_filtered.groupby('Tod')['Hours'].sum().reset_index()
