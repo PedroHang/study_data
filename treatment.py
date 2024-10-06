@@ -119,6 +119,11 @@ if not df.empty:
     df_streaks = df_daily[df_daily['Studied']].groupby('Streak_Group').size().reset_index(name='Streak_Length')
     max_streak = df_streaks['Streak_Length'].max()
 
+    current_streak_df = df_daily[df_daily['Studied']]
+    current_streak = 0
+    if not current_streak_df.empty:
+        current_streak = current_streak_df['Is_Consecutive'].sum()
+
     distinct_study_days = df_daily['Full_Date'][df_daily['Studied']].nunique()
     days_without_study = df_daily[~df_daily['Studied']]['Full_Date'].nunique()
 
@@ -130,14 +135,14 @@ if not df.empty:
 
     with col2:
         st.metric(label="Total time (in days)", value=f"{days_equivalent:.2f} Days")
-        st.metric(label="Distinct Days Studied", value=f"{distinct_study_days} Days")
+        st.metric(label="Current Study Streak", value=f"{current_streak} Days")
 
     with col3:
         st.metric(label="Record Day", value=f"{record_hours:.2f} Hours", delta=f"On {record_date}")
-        st.metric(label="Days Without Study", value=f"{days_without_study} Days")
+        st.metric(label="Distinct Days Studied", value=f"{distinct_study_days} Days")
 
     with col4:
         st.metric(label="Started on", value="2024-05-12")
-
+        st.metric(label="Days Without Study", value=f"{days_without_study} Days")
 else:
     st.warning("No data fetched from the API.")
