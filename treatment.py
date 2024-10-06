@@ -214,5 +214,46 @@ if not df.empty:
     )
     st.plotly_chart(fig_avg_weekday)
 
+
+        # Function to fetch temperature data for a specific date
+    def fetch_temperature(date, city='Petropolis'):
+        API_KEY = 'ab4845d200d3ee44bfe80c69b2d20b7f'  # You'll need to replace this with your actual API key
+        BASE_URL = f"http://api.openweathermap.org/data/2.5/onecall/timemachine"
+        LAT, LON = -22.5149, -43.1779  # Coordinates for Petrópolis
+
+        # API call to fetch weather for the specific date
+        response = requests.get(
+            f"{BASE_URL}?lat={LAT}&lon={LON}&dt={int(pd.Timestamp(date).timestamp())}&appid={API_KEY}&units=metric"
+        )
+
+        if response.status_code == 200:
+            data = response.json()
+            # Get the average temperature for that day
+            temps = [hourly['temp'] for hourly in data['hourly']]
+            avg_temp = sum(temps) / len(temps)
+            return avg_temp
+        else:
+            return None
+
+    # Fetch study data
+    data = fetch_data()  # Assuming this fetches your study data
+    df = pd.DataFrame(data)
+
+    # Add temperature data to each date in the study dataset
+    df['Full_Date'] = pd.to_datetime(df['Full_Date'])
+    df['Avg_Temperature'] = df['Full_Date'].apply(fetch_temperature)
+
+    # Group by temperature and calculate the average study hours
+    df_grouped = df.groupby('Avg_Temperature')['Hours'].mean().reset_index()
+
+    # Create scatter plot to visualize correlation
+    fig = px.scatter(df_grouped, x='Avg_Temperature', y='Hours',
+                    title='Correlation Between Average Temperature and Study Hours',
+                    labels={'Avg_Temperature': 'Average Temperature (°C)', 'Hours': 'Average Study Hours'},
+                    trendline="ols")  # Add a trendline to observe the correlation
+
+    # Show the plot
+    st.plotly_chart(fig)
+
 else:
     st.write("No data available.")
