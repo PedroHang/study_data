@@ -229,7 +229,7 @@ if not df.empty:
 
     # Add margin top for the donut charts
 
-    st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 30px;'>Time of the Day Breakdown</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 10px;'>Time of the Day Breakdown</h3>", unsafe_allow_html=True)
 
     # Create columns for the two donut charts
     col1, col2 = st.columns(2)
