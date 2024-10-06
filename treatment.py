@@ -226,6 +226,7 @@ if not df.empty:
         # Input for custom "Last X Days"
         last_x_days = st.slider("Select the number of days for the recent period:", min_value=1, max_value=365, value=30)
         last_x_days_date = datetime.now() - timedelta(days=last_x_days)
+        st.markdown(f"<h3 style='font-size: 12px;'>Disclaimer: The Time of the Day started being recorded on 2024-10-05</h3>", unsafe_allow_html=True)
 
         # Switch for entire period or custom range
         date_filter = st.radio("Select Time Period", (f"Last {last_x_days} Days", "Entire Period"))
