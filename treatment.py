@@ -273,7 +273,7 @@ if not df.empty:
 
         # Update layout for the legend and labels
         fig_tod.update_layout(
-            margin=dict(t=70, l=10, r=10, b=10),  # Add top margin, adjust others if needed
+            margin=dict(t=200, l=10, r=10, b=10),  # Add top margin, adjust others if needed
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
