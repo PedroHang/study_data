@@ -251,11 +251,10 @@ if not df.empty:
         # Group by 'Study' and sum the 'Hours' for the selected time of day
         df_subject = df_filtered_tod.groupby('Study')['Hours'].sum().reset_index()
 
-        # Define color shades based on selected time of day
         color_palettes = {
-            "Morning": px.colors.sequential.Sunset,
-            "Afternoon": px.colors.sequential.Teal,
-            "Night": px.colors.sequential.Purples
+            "Morning": ["#ff7a44", "#FFA07A", "#ffc3ab", "#ffdcce", "#fff8f5"],  # Shades of Light Salmon for Morning
+            "Afternoon": ["#20C4AA", "#28D2B2", "#30DFBA"],  # Shades of Light Sea Green for Afternoon
+            "Night": ["#8A2BE2", "#7A22D0", "#6A1BBE"]  # Shades of Blue Violet for Night
         }
 
         # Create a donut chart for subject distribution
