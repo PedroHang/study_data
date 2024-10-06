@@ -167,7 +167,7 @@ if not df.empty:
     days_equivalent = total_hours / 24
 
     # Display the total hours studied with color using Markdown (or HTML)
-    st.markdown("<h3 style='color: lightblue; font-family: Arial;'>Total Hours Studied</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: lightblue; font-family: Arial; margin-top: 40px'>Total Hours Studied</h3>", unsafe_allow_html=True)
 
 
     # Create two columns for metrics
