@@ -36,7 +36,6 @@ if not df.empty:
     # Format the 'Full_Date' column to datetime
     df['Full_Date'] = pd.to_datetime(df['Full_Date'])
 
-
     # Continue with your existing charts and analysis...
     # Group by 'Full_Date' and sum the hours
     df_daily = df.groupby("Full_Date")['Hours'].sum().reset_index()
@@ -161,5 +160,11 @@ if not df.empty:
 
     for index, row in top_studies.iterrows():
         st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
+
+    # --- Display the total hours studied ---
+    total_hours = df['Hours'].sum()
+    st.subheader("Total Hours Studied")
+    st.metric(label="Total Hours", value=f"{total_hours:.2f} Hours")
+
 else:
     st.warning("No data fetched from the API.")
