@@ -100,15 +100,8 @@ if not df.empty:
     top_studies = df_study_recent.sort_values(by='Hours', ascending=False).head(3)
 
     st.subheader("Top 3 Subjects Studied in the Last 15 Days")
-        # Create columns for the top studies
-    colu1, colu2, colu3 = st.columns(3)
-
-    # Use an array to store the columns
-    columns = [colu1, colu2, colu3]
-
     for index, row in top_studies.iterrows():
-        with columns[index]:  # Assign each row to a specific column
-            st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
+        st.metric(label=row['Study'], value=f"{row['Hours']:.2f} Hours")
 
     total_hours = df['Hours'].sum()
     days_equivalent = total_hours / 24
