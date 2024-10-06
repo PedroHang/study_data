@@ -250,7 +250,7 @@ if not df.empty:
     )
 
     fig_tod.update_layout(
-        title_font=dict(size=24),
+        title_font=dict(size=40),
         width=600,
         height=600
     )
