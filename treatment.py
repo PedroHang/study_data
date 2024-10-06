@@ -232,8 +232,7 @@ if not df.empty:
     st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 5px;'>Time of the Day Breakdown ☀️</h3>", unsafe_allow_html=True)
 
     # Create columns for the two donut charts
-    tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
   
     # Custom color palettes for each time of day
@@ -293,8 +292,10 @@ if not df.empty:
         # Display the donut chart
         st.plotly_chart(fig_tod)
 
-    # Content for col2
     with col2:
+        tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
+    # Content for col2
+    with col3:
         st.markdown("<h3 style='margin-top: 20px;'>Study Hours for Selected Time of Day</h3>", unsafe_allow_html=True)  # Streamlit title with top margin
         
         # Filter data based on the selected time of day
