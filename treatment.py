@@ -7,17 +7,17 @@ from datetime import datetime, timedelta
 API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTVLP5IFZY9R2CTS4Ld9yFm9ymyAyTcW5IK_aVjmAqWPhrNmg5jWAzPgqd1ziVBqu3QEqL0Y4rpjF2/pub?output=csv"
 st.set_page_config(layout="wide")
 
-# Define your custom style
-style = """
+# Custom CSS to set background color
+st.markdown(
+    """
     <style>
-    body {
-        background-color: #ADD8E6;  # Replace with your desired color
+    .reportview-container {
+        background-color: #f0f0f5;  /* Change to your desired color */
     }
     </style>
-"""
-
-# Apply the style
-st.markdown(style, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
 def fetch_data():
     try:
