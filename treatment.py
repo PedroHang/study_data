@@ -295,7 +295,7 @@ if not df.empty:
             """
             <style>
             .stRadio {
-                font-size: 12px;  /* Change this value to adjust the size */
+                font-size: 7px;  /* Change this value to adjust the size */
             }
             </style>
             """,
