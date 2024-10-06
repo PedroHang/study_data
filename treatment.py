@@ -214,7 +214,12 @@ if not df.empty:
     )
     st.plotly_chart(fig_avg_weekday)
 
-        # Create columns for the donut chart and the total hours card
+
+        ##### PUT A MARGIN TOP HERE 40px
+    # Add a margin top of 40px
+    st.markdown('<div style="margin-top: 40px;"></div>', unsafe_allow_html=True)
+
+    # Create columns for the donut chart and the total hours card
     col1, col2 = st.columns(2)
 
     with col1:
@@ -276,6 +281,8 @@ if not df.empty:
         st.plotly_chart(fig_tod)
 
     # Now you can use col2 for other content as needed
+
+        
 
 
 
