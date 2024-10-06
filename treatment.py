@@ -142,5 +142,36 @@ if not df.empty:
     with col4:
         st.metric(label="Started on", value="2024-05-12")
         st.metric(label="No study days", value=f"{days_without_study} Days")
+
+    # After existing code where df is defined and processed
+
+    # Add a new column for the day of the week
+    df['Day_of_Week'] = df['Full_Date'].dt.day_name()  # Get the name of the day
+
+    # Calculate the historic average for each day of the week
+    df_weekday_avg = df.groupby('Day_of_Week')['Hours'].mean().reset_index()
+    df_weekday_avg['Hours'] = df_weekday_avg['Hours'].round(2)
+
+    # Reorder the DataFrame to ensure days are in the correct order
+    days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    df_weekday_avg['Day_of_Week'] = pd.Categorical(df_weekday_avg['Day_of_Week'], categories=days_order, ordered=True)
+    df_weekday_avg = df_weekday_avg.sort_values('Day_of_Week')
+
+    # Create the bar plot for historic average study hours by day of the week
+    fig_weekday_avg = px.bar(df_weekday_avg, x='Day_of_Week', y='Hours',
+                            title='Average Study Hours by Day of the Week',
+                            labels={'Day_of_Week': 'Day of the Week', 'Hours': 'Average Hours'},
+                            text='Hours',
+                            color='Hours',
+                            color_continuous_scale=px.colors.sequential.Viridis)
+
+    fig_weekday_avg.update_layout(title_font=dict(size=24),
+                                xaxis_title_font=dict(size=18),
+                                yaxis_title_font=dict(size=18),
+                                legend=dict(title_font=dict(size=16), font=dict(size=14)),
+                                width=1800, height=600)
+
+    # Display the plot in the Streamlit app
+    st.plotly_chart(fig_weekday_avg)
 else:
     st.warning("No data fetched from the API.")
