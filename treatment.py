@@ -323,8 +323,8 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
-            width=650,
-            height=550
+            width=550,
+            height=400
         )
 
         # Display the donut chart
