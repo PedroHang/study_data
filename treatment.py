@@ -38,7 +38,8 @@ if not df.empty:
     # Create a donut chart for today's study hours by subject
     if not df_today.empty:
         fig_today = px.pie(df_today, values='Hours', names='Study', title='Study Hours Today',
-                           hole=0.4, color='Hours', color_continuous_scale=px.colors.sequential.Viridis)
+                           hole=0.4, color='Study', 
+                           color_discrete_sequence=px.colors.sequential.Viridis)
         fig_today.update_traces(textinfo='percent+label')
         fig_today.update_layout(title_font=dict(size=24),
                                 legend=dict(title_font=dict(size=16), font=dict(size=14)),
@@ -161,28 +162,11 @@ if not df.empty:
         st.metric(label="Current Study Streak", value=f"{current_streak} Days")
 
     with col3:
-        st.metric(label="Record Day", value=f"{record_hours:.2f} Hours", delta=f"On {record_date}")
-        st.metric(label="Distinct Days Studied", value=f"{distinct_study_days} Days")
+        st.metric(label="Different Days Studied", value=distinct_study_days)
+        st.metric(label="Days Without Study", value=days_without_study, delta="📉", delta_color="inverse")
 
     with col4:
-        st.metric(label="Started on", value="2024-05-12")
-        st.metric(label="No study days", value=f"{days_without_study} Days")
-    
-    # Add a new column for the day of the week
-    df['Day_of_Week'] = df['Full_Date'].dt.day_name()  # Get the name of the day
-
-    # Calculate total hours for each day of the week
-    total_hours_per_weekday = df.groupby('Day_of_Week')['Hours'].sum().reset_index()
-
-    # Calculate the number of unique study days for each day of the week
-    unique_days_per_weekday = df.groupby('Day_of_Week')['Full_Date'].nunique().reset_index()
-
-    # Merge the two DataFrames
-    average_hours_per_weekday = total_hours_per_weekday.merge(unique_days_per_weekday, on='Day_of_Week', suffixes=('_Total', '_Unique'))
-    average_hours_per_weekday['Average_Hours'] = average_hours_per_weekday['Hours_Total'] / average_hours_per_weekday['Full_Date_Unique']
-
-    st.subheader("Average Study Hours by Day of the Week")
-    st.bar_chart(average_hours_per_weekday.set_index('Day_of_Week')['Average_Hours'])
+        st.metric(label="Record Study Hours", value=f"{record_hours:.2f} Hours", delta=f"{record_date}")
 
 else:
     st.warning("No data available.")
