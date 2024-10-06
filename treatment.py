@@ -28,31 +28,6 @@ if not df.empty:
     df['Hours'] = pd.to_numeric(df['Hours'], errors='coerce')
     df['Full_Date'] = pd.to_datetime(df['Full_Date'])
 
-    # Calculate today's date and filter data for today
-    today = datetime.now().date()
-    df_today = df[df['Full_Date'].dt.date == today]
-
-    # Calculate total hours studied today
-    total_hours_today = df_today['Hours'].sum()
-
-    # Create a donut chart for today's study hours by subject
-    if not df_today.empty:
-        fig_today = px.pie(df_today, values='Hours', names='Study', title='Study Hours Today',
-                           hole=0.4, color='Hours', color_continuous_scale=px.colors.sequential.Viridis)
-        fig_today.update_traces(textinfo='percent+label')
-        fig_today.update_layout(title_font=dict(size=24),
-                                legend=dict(title_font=dict(size=16), font=dict(size=14)),
-                                width=600, height=400)
-
-    # Create columns for layout
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.plotly_chart(fig_today)  # Display the donut chart
-
-    with col2:
-        st.metric(label="Total Hours Studied Today", value=f"{total_hours_today:.2f} Hours")  # Display total hours
-
     df_daily = df.groupby("Full_Date")['Hours'].sum().reset_index()
     df_daily['Rolling Volatility'] = df_daily['Hours'].rolling(window=7).std()
     df_daily['Week'] = df_daily['Full_Date'].dt.to_period('W').apply(lambda r: r.start_time)
@@ -168,7 +143,7 @@ if not df.empty:
         st.metric(label="Started on", value="2024-05-12")
         st.metric(label="No study days", value=f"{days_without_study} Days")
     
-    # Add a new column for the day of the week
+        # Add a new column for the day of the week
     df['Day_of_Week'] = df['Full_Date'].dt.day_name()  # Get the name of the day
 
     # Calculate total hours for each day of the week
@@ -178,11 +153,33 @@ if not df.empty:
     unique_days_per_weekday = df.groupby('Day_of_Week')['Full_Date'].nunique().reset_index()
 
     # Merge the two DataFrames
-    average_hours_per_weekday = total_hours_per_weekday.merge(unique_days_per_weekday, on='Day_of_Week', suffixes=('_Total', '_Unique'))
-    average_hours_per_weekday['Average_Hours'] = average_hours_per_weekday['Hours_Total'] / average_hours_per_weekday['Full_Date_Unique']
+    average_hours_per_weekday = pd.merge(total_hours_per_weekday, unique_days_per_weekday, on='Day_of_Week')
+    average_hours_per_weekday.columns = ['Day_of_Week', 'Total_Hours', 'Unique_Days']
 
-    st.subheader("Average Study Hours by Day of the Week")
-    st.bar_chart(average_hours_per_weekday.set_index('Day_of_Week')['Average_Hours'])
+    # Calculate the average hours for each day of the week
+    average_hours_per_weekday['Average_Hours'] = average_hours_per_weekday['Total_Hours'] / average_hours_per_weekday['Unique_Days']
+
+    # Reorder the DataFrame to ensure days are in the correct order
+    days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    average_hours_per_weekday['Day_of_Week'] = pd.Categorical(average_hours_per_weekday['Day_of_Week'], categories=days_order, ordered=True)
+    average_hours_per_weekday = average_hours_per_weekday.sort_values('Day_of_Week')
+
+    # Create the bar plot for historic average study hours by day of the week
+    fig_weekday_avg = px.bar(average_hours_per_weekday, x='Day_of_Week', y='Average_Hours',
+                            title='Average Study Hours by Day of the Week',
+                            labels={'Day_of_Week': 'Day of the Week', 'Average_Hours': 'Average Hours'},
+                            text='Average_Hours',
+                            color='Average_Hours',
+                            color_continuous_scale=px.colors.sequential.Viridis)
+
+    fig_weekday_avg.update_layout(title_font=dict(size=24),
+                                xaxis_title_font=dict(size=18),
+                                yaxis_title_font=dict(size=18),
+                                legend=dict(title_font=dict(size=16), font=dict(size=14)),
+                                width=1300, height=450)
+    fig_weekday_avg.update_traces(texttemplate='%{text:.2f}', textposition='outside')
+    # Display the plot in the Streamlit app
+    st.plotly_chart(fig_weekday_avg)
 
 else:
     st.warning("No data available.")
