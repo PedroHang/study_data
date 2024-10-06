@@ -226,27 +226,38 @@ if not df.empty:
     # Group by 'Tod' and sum the 'Hours'
     df_tod = df_filtered.groupby('Tod')['Hours'].sum().reset_index()
 
-    # Plot the distribution of study hours for 'Tod'
-    fig_tod = px.bar(
+    # Fixed colors for each time of day
+    tod_colors = {
+        "Morning": "#FFA07A",  # Light Salmon
+        "Afternoon": "#20B2AA",  # Light Sea Green
+        "Night": "#8A2BE2"  # Blue Violet
+    }
+
+    # Create a donut chart for 'Tod' distribution
+    fig_tod = px.pie(
         df_tod,
-        x='Tod',
-        y='Hours',
+        values='Hours',
+        names='Tod',
         title=f"Study Hours Distribution by Time of Day ({date_filter})",
-        labels={'Tod': 'Time of Day', 'Hours': 'Total Hours'},
-        text=df_tod['Hours'].apply(lambda x: f"{x:.2f}"),  # Show hours with 2 decimals
-        color='Hours',
-        color_continuous_scale=px.colors.sequential.Viridis
+        hole=0.4,
+        color='Tod',
+        color_discrete_map=tod_colors
+    )
+
+    fig_tod.update_traces(
+        textinfo='label+percent+value',  # Display labels, percentage, and total hours
+        showlegend=True
     )
 
     fig_tod.update_layout(
         title_font=dict(size=24),
-        xaxis_title_font=dict(size=18),
-        yaxis_title_font=dict(size=18),
-        width=1800,
+        width=600,
         height=600
     )
 
+    # Display the donut chart
     st.plotly_chart(fig_tod)
+
 
 else:
     st.write("No data available.")
