@@ -228,14 +228,13 @@ if not df.empty:
     st.plotly_chart(fig_avg_weekday)
 
     # Add margin top for the donut charts
-    st.markdown('<div style="margin-top: 40px;"></div>', unsafe_allow_html=True)
+
+    st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 30px;'>Time of the Day Breakdown</h3>", unsafe_allow_html=True)
 
     # Create columns for the two donut charts
     col1, col2 = st.columns(2)
 
-    # Centralized Title for both charts
-    st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 30px;'>Time of the Day Breakdown</h3>", unsafe_allow_html=True)
-
+  
     # Custom color palettes for each time of day
     color_palettes = {
         "Morning": ["#ff7a44", "#FFA07A", "#ffc3ab", "#ffdcce", "#fff8f5"],  # Shades of Light Salmon for Morning
