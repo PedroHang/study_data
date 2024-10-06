@@ -166,12 +166,19 @@ if not df.empty:
     total_hours = df['Hours'].sum()
     days_equivalent = total_hours / 24
 
+        # Calculate the maximum hours for a single day
+    max_hours_day = df_daily.loc[df_daily['Hours'].idxmax()]
+
+    # Extract the date and hours for the day with the maximum hours
+    record_hours = max_hours_day['Hours']
+    record_date = max_hours_day['Full_Date'].strftime("%Y-%m-%d")  # Format date to a readable format
+
     # Display the total hours studied with color using Markdown (or HTML)
-    st.markdown("<h3 style='color: lightblue; font-family: Arial; margin-top: 40px'>Total Hours Studied</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: lightblue; font-family: Arial; margin-top: 40px'>- Total Hours Studied -</h3>", unsafe_allow_html=True)
 
 
     # Create two columns for metrics
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     # Display the total hours and days equivalent side by side
     with col1:
@@ -179,6 +186,9 @@ if not df.empty:
 
     with col2:
         st.metric(label="Equivalent to", value=f"{days_equivalent:.2f} Days")
+
+    with col3:
+        st.metric(label="Record Day", value=f"{record_hours:.2f} Hours", delta=f"On {record_date}")
 
 else:
     st.warning("No data fetched from the API.")
