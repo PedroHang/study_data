@@ -242,9 +242,12 @@ if not df.empty:
         "Night": ["#6c19b9", "#8A2BE2", "#a45ae8", "#b981ee", "#d4b1f4"]  # Shades of Blue Violet for Night
     }
 
+    # Radio button for selecting time of day
+    tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
+
     # Content for col1
     with col1:
-        st.markdown("<h3 style='margin-top: 150px;'>Study Hours Distribution by Time of Day</h3>", unsafe_allow_html=True)  # Streamlit title with top margin
+        st.markdown("<h3 style='margin-top: 20px;'>Study Hours Distribution by Time of Day</h3>", unsafe_allow_html=True)  # Streamlit title with top margin
         
         # Group by 'Tod' and sum the 'Hours'
         df_tod = df_filtered.groupby('Tod')['Hours'].sum().reset_index()
@@ -294,9 +297,6 @@ if not df.empty:
     with col2:
         st.markdown("<h3 style='margin-top: 20px;'>Study Hours for Selected Time of Day</h3>", unsafe_allow_html=True)  # Streamlit title with top margin
         
-        # Radio button for selecting time of day
-        tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
-
         # Filter data based on the selected time of day
         df_filtered_tod = df_filtered[df_filtered['Tod'] == tod_selected]
 
