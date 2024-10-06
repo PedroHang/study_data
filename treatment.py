@@ -119,10 +119,8 @@ if not df.empty:
     df_streaks = df_daily[df_daily['Studied']].groupby('Streak_Group').size().reset_index(name='Streak_Length')
     max_streak = df_streaks['Streak_Length'].max()
 
-    current_streak_df = df_daily[df_daily['Studied']]
-    current_streak = 0
-    if not current_streak_df.empty:
-        current_streak = current_streak_df['Is_Consecutive'].sum()
+    last_zero_day = df_daily[df_daily['Hours'] == 0]['Full_Date'].max()
+    current_streak = (datetime.now().date() - last_zero_day.date()).days if not pd.isnull(last_zero_day) else 0
 
     distinct_study_days = df_daily['Full_Date'][df_daily['Studied']].nunique()
     days_without_study = df_daily[~df_daily['Studied']]['Full_Date'].nunique()
