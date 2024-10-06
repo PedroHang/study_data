@@ -34,6 +34,27 @@ if not df.empty:
     df_weekly = df_daily.groupby('Week')['Hours'].mean().reset_index()
     df_weekly['Hours'] = df_weekly['Hours'].round(2)
 
+    # Donut chart for today's study hours by subject
+    today = datetime.now().date()
+    df_today = df[df['Full_Date'].dt.date == today]
+
+    if not df_today.empty:
+        fig_today = px.pie(df_today, values='Hours', names='Study', title='Today\'s Study Hours by Subject',
+                           hole=0.4, color='Hours')
+        fig_today.update_traces(textinfo='label+value')  # Show label and actual hours
+        fig_today.update_layout(title_font=dict(size=24),
+                                width=600, height=400)
+        
+        # Create columns for the donut chart and the total hours card
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.plotly_chart(fig_today)
+
+        with col2:
+            total_hours_today = df_today['Hours'].sum()
+            st.markdown(f"<h1 style='text-align: center; font-size: 48px; color: orange;'>{total_hours_today:.2f} Hours</h1>", unsafe_allow_html=True)
+
     if not df_daily.empty:
         plot_option = st.selectbox("Select Plot Type:", ("Total Hours", "Rolling Volatility", "Weekly Average"))
 
@@ -143,27 +164,6 @@ if not df.empty:
         st.metric(label="Started on", value="2024-05-12")
         st.metric(label="No study days", value=f"{days_without_study} Days")
     
-    # Donut chart for today's study hours by subject
-    today = datetime.now().date()
-    df_today = df[df['Full_Date'].dt.date == today]
-
-    if not df_today.empty:
-        fig_today = px.pie(df_today, values='Hours', names='Study', title='Today\'s Study Hours by Subject',
-                           hole=0.4, color='Hours')
-        fig_today.update_traces(textinfo='label+value')  # Show label and actual hours
-        fig_today.update_layout(title_font=dict(size=24),
-                                width=600, height=400)
-        
-        # Create two columns for the donut chart and the total hours card
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.plotly_chart(fig_today)
-
-        with col2:
-            total_hours_today = df_today['Hours'].sum()
-            st.markdown(f"<h1 style='text-align: center; font-size: 48px; color: orange;'>{total_hours_today:.2f} Hours</h1>", unsafe_allow_html=True)
-
     # Add a new column for the day of the week
     df['Day_of_Week'] = df['Full_Date'].dt.day_name()  # Get the name of the day
 
