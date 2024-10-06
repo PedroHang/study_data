@@ -178,17 +178,20 @@ if not df.empty:
 
 
     # Create two columns for metrics
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     # Display the total hours and days equivalent side by side
     with col1:
         st.metric(label="Total Hours", value=f"{total_hours:.2f} Hours")
 
     with col2:
-        st.metric(label="Equivalent to", value=f"{days_equivalent:.2f} Days")
+        st.metric(label="Total time (in days)", value=f"{days_equivalent:.2f} Days")
 
     with col3:
         st.metric(label="Record Day", value=f"{record_hours:.2f} Hours", delta=f"On {record_date}")
+
+    with col4:
+        st.metric(label="Started on", value="2024-05-12")
 
 else:
     st.warning("No data fetched from the API.")
