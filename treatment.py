@@ -169,7 +169,7 @@ if not df.empty:
                                 xaxis_title_font=dict(size=18),
                                 yaxis_title_font=dict(size=18),
                                 legend=dict(title_font=dict(size=16), font=dict(size=14)),
-                                width=1800, height=600)
+                                width=1300, height=360)
 
     # Display the plot in the Streamlit app
     st.plotly_chart(fig_weekday_avg)
