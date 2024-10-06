@@ -290,18 +290,20 @@ if not df.empty:
     # Content for col2
     with col2:
         # Switch for Morning, Afternoon, or Night
-        # Create columns for the radio buttons
-        col1, col2, col3 = st.columns(3)
+        # Add custom CSS to make the radio button smaller
+        st.markdown(
+            """
+            <style>
+            .stRadio {
+                font-size: 12px;  /* Change this value to adjust the size */
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
 
-        # Place the radio buttons in the columns with smaller text
-        with col1:
-            st.radio("Select Time of Day", ["Morning"], key="morning", format_func=lambda x: f"<span style='font-size: 12px;'>{x}</span>", unsafe_allow_html=True)
-
-        with col2:
-            st.radio("", ["Afternoon"], key="afternoon", format_func=lambda x: f"<span style='font-size: 12px;'>{x}</span>", unsafe_allow_html=True)
-
-        with col3:
-            st.radio("", ["Night"], key="night", format_func=lambda x: f"<span style='font-size: 12px;'>{x}</span>", unsafe_allow_html=True)
+        # Radio button for selecting time of day
+        tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
 
         # Filter data based on the selected time of day
         df_filtered_tod = df_filtered[df_filtered['Tod'] == tod_selected]
