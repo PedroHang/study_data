@@ -169,23 +169,75 @@ if not df.empty:
 
 
     ######################################
+
     st.markdown(f"<h3 style='text-align: center; font-size: 45px; margin-top: 60px;'>Insights</h3>", unsafe_allow_html=True)
 
+
+    # Add a new column for the day of the week
+    df['Day_of_Week'] = df['Full_Date'].dt.day_name()  # Get the name of the day
+
+    # Calculate total hours for each day of the week
+    total_hours_per_weekday = df.groupby('Day_of_Week')['Hours'].sum().reset_index()
+
+    # Calculate the number of unique study days for each day of the week
+    unique_days_per_weekday = df.groupby('Day_of_Week')['Full_Date'].nunique().reset_index()
+
+    # Merge the two DataFrames
+    average_hours_per_weekday = pd.merge(total_hours_per_weekday, unique_days_per_weekday, on='Day_of_Week')
+    average_hours_per_weekday['Average_Hours'] = average_hours_per_weekday['Hours'] / average_hours_per_weekday['Full_Date']
+
+    # Reorder the days of the week
+    days_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    average_hours_per_weekday['Day_of_Week'] = pd.Categorical(average_hours_per_weekday['Day_of_Week'], categories=days_order, ordered=True)
+    average_hours_per_weekday = average_hours_per_weekday.sort_values('Day_of_Week')
+
+    # Plot the average study hours by day of the week
+    average_hours_per_weekday['Average_Hours'] = average_hours_per_weekday['Average_Hours'].round(2)  # Round to 2 decimals
+
+    fig_avg_weekday = px.bar(
+        average_hours_per_weekday, 
+        x='Day_of_Week', 
+        y='Average_Hours',
+        title='Average Study Hours by Day of the Week',
+        labels={'Day_of_Week': 'Day of the Week', 'Average_Hours': 'Average Hours'},
+        text=average_hours_per_weekday['Average_Hours'].apply(lambda x: f"{x:.2f}"),  # Format text to 2 decimals
+        color='Average_Hours',
+        color_continuous_scale=px.colors.sequential.Viridis
+    )
+    fig_avg_weekday.update_layout(
+        title_font=dict(size=24),
+        xaxis_title_font=dict(size=18),
+        yaxis_title_font=dict(size=18),
+        legend=dict(title_font=dict(size=16), font=dict(size=14)),
+        width=1800, 
+        height=600
+    )
+    st.plotly_chart(fig_avg_weekday)
+
+
+        ##### PUT A MARGIN TOP HERE 40px
     # Add a margin top of 40px
     st.markdown('<div style="margin-top: 40px;"></div>', unsafe_allow_html=True)
 
-    # Create a centralized title for both charts
-    st.markdown(f"<h2 style='text-align: center; font-size: 30px; margin-top: 20px;'>Time of the Day Breakdown</h2>", unsafe_allow_html=True)
-
-    # Create columns for the two donut charts
+        # Create columns for the two donut charts
+        # Create columns for the two donut charts
     col1, col2 = st.columns(2)
+
+    # Centralized Title for both charts
+    st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 30px;'>Time of the Day Breakdown</h3>", unsafe_allow_html=True)
+
+    # Custom color palettes for each time of day
+    color_palettes = {
+        "Morning": ["#ff7a44", "#FFA07A", "#ffc3ab", "#ffdcce", "#fff8f5"],  # Shades of Light Salmon for Morning
+        "Afternoon": ["#198983", "#20B2AA", "#2ed9d0", "#53e0d8", "#8beae5"],  # Shades of Light Sea Green for Afternoon
+        "Night": ["#6c19b9", "#8A2BE2", "#a45ae8", "#b981ee", "#d4b1f4"]  # Shades of Blue Violet for Night
+    }
 
     # Content for col1
     with col1:
         # Input for custom "Last X Days"
         last_x_days = st.slider("Select the number of days for the recent period:", min_value=1, max_value=365, value=30)
         last_x_days_date = datetime.now() - timedelta(days=last_x_days)
-
         st.markdown(f"<h3 style='font-size: 12px;'>Disclaimer: The Time of the Day started being recorded on 2024-10-05</h3>", unsafe_allow_html=True)
 
         # Switch for entire period or custom range
@@ -225,7 +277,6 @@ if not df.empty:
 
         # Update layout for the legend and labels
         fig_tod.update_layout(
-            title_font=dict(size=24),
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -233,8 +284,8 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
-            width=600,
-            height=500
+            width=650,
+            height=550
         )
 
         # Display the donut chart
@@ -251,20 +302,13 @@ if not df.empty:
         # Group by 'Study' and sum the 'Hours' for the selected time of day
         df_subject = df_filtered_tod.groupby('Study')['Hours'].sum().reset_index()
 
-        color_palettes = {
-            "Morning": ["#ff7a44", "#FFA07A", "#ffc3ab", "#ffdcce", "#fff8f5"],  # Shades of Light Salmon for Morning
-            "Afternoon": ["#198983", "#20B2AA", "#2ed9d0", "#53e0d8", "#8beae5"],  # Shades of Light Sea Green for Afternoon
-            "Night": ["#6c19b9", "#8A2BE2", "#a45ae8", "#b981ee", "#d4b1f4"]  # Shades of Blue Violet for Night
-        }
-
         # Create a donut chart for subject distribution
         fig_subject = px.pie(
             df_subject,
             values='Hours',
             names='Study',
             hole=0.4,
-            color='Study',
-            color_discrete_sequence=color_palettes[tod_selected]
+            color_discrete_sequence=color_palettes[tod_selected]  # Use custom shades for the selected time of day
         )
 
         # Update the traces for labels and legend
@@ -276,7 +320,6 @@ if not df.empty:
 
         # Update layout for the legend and labels
         fig_subject.update_layout(
-            title_font=dict(size=24),
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -284,12 +327,13 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
-            width=600,
-            height=500
+            width=650,
+            height=550
         )
 
         # Display the donut chart
         st.plotly_chart(fig_subject)
+
 
 
 
