@@ -289,13 +289,13 @@ if not df.empty:
 
     # Content for col2
     with col2:
-        # Switch for Morning, Afternoon, or Night
-        # Add custom CSS to make the radio button smaller
+    # Switch for Morning, Afternoon, or Night
+    # Add custom CSS to make the radio button smaller
         st.markdown(
             """
             <style>
             .stRadio {
-                font-size: 7px;  /* Change this value to adjust the size */
+                font-size: 7px;
             }
             </style>
             """,
@@ -329,6 +329,7 @@ if not df.empty:
 
         # Update layout for the legend and labels
         fig_subject.update_layout(
+            margin=dict(l=10, r=10, t=10, b=10),  # Adjust margins to reduce padding
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -342,7 +343,6 @@ if not df.empty:
 
         # Display the donut chart
         st.plotly_chart(fig_subject)
-
 
 else:
     st.write("No data available.")
