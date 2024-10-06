@@ -166,7 +166,13 @@ if not df.empty:
     with col4:
         st.metric(label="Started on", value="2024-05-12")
         st.metric(label="No study days", value=f"{days_without_study} Days")
-    
+
+
+    ######################################
+
+    st.markdown(f"<h3 style='text-align: center; font-size: 18px;'>Total Hours Studied Today</h3>", unsafe_allow_html=True)
+
+
     # Add a new column for the day of the week
     df['Day_of_Week'] = df['Full_Date'].dt.day_name()  # Get the name of the day
 
