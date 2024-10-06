@@ -214,62 +214,69 @@ if not df.empty:
     )
     st.plotly_chart(fig_avg_weekday)
 
+        # Create columns for the donut chart and the total hours card
+    col1, col2 = st.columns(2)
+
+    with col1:
         # Input for custom "Last X Days"
-    last_x_days = st.slider("Select the number of days for the recent period:", min_value=1, max_value=365, value=30)
-    last_x_days_date = datetime.now() - timedelta(days=last_x_days)
+        last_x_days = st.slider("Select the number of days for the recent period:", min_value=1, max_value=365, value=30)
+        last_x_days_date = datetime.now() - timedelta(days=last_x_days)
 
-    # Switch for entire period or custom range
-    date_filter = st.radio("Select Time Period", (f"Last {last_x_days} Days", "Entire Period"))
+        # Switch for entire period or custom range
+        date_filter = st.radio("Select Time Period", (f"Last {last_x_days} Days", "Entire Period"))
 
-    if date_filter == f"Last {last_x_days} Days":
-        df_filtered = df[df['Full_Date'] >= last_x_days_date]
-    else:
-        df_filtered = df
+        if date_filter == f"Last {last_x_days} Days":
+            df_filtered = df[df['Full_Date'] >= last_x_days_date]
+        else:
+            df_filtered = df
 
-    # Group by 'Tod' and sum the 'Hours'
-    df_tod = df_filtered.groupby('Tod')['Hours'].sum().reset_index()
+        # Group by 'Tod' and sum the 'Hours'
+        df_tod = df_filtered.groupby('Tod')['Hours'].sum().reset_index()
 
-    # Fixed colors for each time of day
-    tod_colors = {
-        "Morning": "#FFA07A",  # Light Salmon
-        "Afternoon": "#20B2AA",  # Light Sea Green
-        "Night": "#8A2BE2"  # Blue Violet
-    }
+        # Fixed colors for each time of day
+        tod_colors = {
+            "Morning": "#FFA07A",  # Light Salmon
+            "Afternoon": "#20B2AA",  # Light Sea Green
+            "Night": "#8A2BE2"  # Blue Violet
+        }
 
-    # Create a donut chart for 'Tod' distribution
-    fig_tod = px.pie(
-        df_tod,
-        values='Hours',
-        names='Tod',
-        title=f"Study Hours Distribution by Time of Day ({date_filter})",
-        hole=0.4,
-        color='Tod',
-        color_discrete_map=tod_colors
-    )
+        # Create a donut chart for 'Tod' distribution
+        fig_tod = px.pie(
+            df_tod,
+            values='Hours',
+            names='Tod',
+            title=f"Study Hours Distribution by Time of Day ({date_filter})",
+            hole=0.4,
+            color='Tod',
+            color_discrete_map=tod_colors
+        )
 
-    # Update the traces for labels and legend
-    fig_tod.update_traces(
-        textinfo='label+percent+value',  # Show label, percent, and hours
-        textfont_size=16,  # Increase the label font size
-        marker=dict(line=dict(color='#000000', width=1.5))  # Add a border for better visibility
-    )
+        # Update the traces for labels and legend
+        fig_tod.update_traces(
+            textinfo='label+percent+value',  # Show label, percent, and hours
+            textfont_size=16,  # Increase the label font size
+            marker=dict(line=dict(color='#000000', width=1.5))  # Add a border for better visibility
+        )
 
-    # Update layout for the legend and labels
-    fig_tod.update_layout(
-        title_font=dict(size=24),
-        legend=dict(
-            font=dict(size=14),  # Increase legend font size
-            yanchor="top",
-            y=1.05,
-            xanchor="right",
-            x=1.3
-        ),
-        width=700,
-        height=600
-    )
+        # Update layout for the legend and labels
+        fig_tod.update_layout(
+            title_font=dict(size=24),
+            legend=dict(
+                font=dict(size=14),  # Increase legend font size
+                yanchor="top",
+                y=1.05,
+                xanchor="right",
+                x=1.3
+            ),
+            width=700,
+            height=600
+        )
 
-    # Display the donut chart
-    st.plotly_chart(fig_tod)
+        # Display the donut chart
+        st.plotly_chart(fig_tod)
+
+    # Now you can use col2 for other content as needed
+
 
 
 else:
