@@ -183,6 +183,7 @@ if not df.empty:
     # Display the total hours and days equivalent side by side
     with col1:
         st.metric(label="Total Hours", value=f"{total_hours:.2f} Hours")
+        st.metric(label="Total time (in days)", value=f"{days_equivalent:.2f} Days")
 
     with col2:
         st.metric(label="Total time (in days)", value=f"{days_equivalent:.2f} Days")
