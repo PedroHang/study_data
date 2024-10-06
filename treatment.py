@@ -167,7 +167,7 @@ if not df.empty:
     days_equivalent = total_hours / 24
 
     # Display the total hours studied with color using Markdown (or HTML)
-    st.markdown("<h3 style='color: blue;'>Total Hours Studied</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: light-blue;'>Total Hours Studied</h3>", unsafe_allow_html=True)
 
     # Create two columns for metrics
     col1, col2 = st.columns(2)
@@ -177,7 +177,7 @@ if not df.empty:
         st.metric(label="Total Hours", value=f"{total_hours:.2f} Hours")
 
     with col2:
-        st.metric(label="Equivalent to Days", value=f"{days_equivalent:.2f} Days")
+        st.metric(label="Equivalent to", value=f"{days_equivalent:.2f} Days")
 
 else:
     st.warning("No data fetched from the API.")
