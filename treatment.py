@@ -183,17 +183,26 @@ if not df.empty:
     average_hours_per_weekday = average_hours_per_weekday.sort_values('Day_of_Week')
 
     # Plot the average study hours by day of the week
-    fig_avg_weekday = px.bar(average_hours_per_weekday, x='Day_of_Week', y='Average_Hours',
-                              title='Average Study Hours by Day of the Week',
-                              labels={'Day_of_Week': 'Day of the Week', 'Average_Hours': 'Average Hours'},
-                              text='Average_Hours',
-                              color='Average_Hours',
-                              color_continuous_scale=px.colors.sequential.Viridis)
-    fig_avg_weekday.update_layout(title_font=dict(size=24),
-                                   xaxis_title_font=dict(size=18),
-                                   yaxis_title_font=dict(size=18),
-                                   legend=dict(title_font=dict(size=16), font=dict(size=14)),
-                                   width=1800, height=600)
+    average_hours_per_weekday['Average_Hours'] = average_hours_per_weekday['Average_Hours'].round(2)  # Round to 2 decimals
+
+    fig_avg_weekday = px.bar(
+        average_hours_per_weekday, 
+        x='Day_of_Week', 
+        y='Average_Hours',
+        title='Average Study Hours by Day of the Week',
+        labels={'Day_of_Week': 'Day of the Week', 'Average_Hours': 'Average Hours'},
+        text=average_hours_per_weekday['Average_Hours'].apply(lambda x: f"{x:.2f}"),  # Format text to 2 decimals
+        color='Average_Hours',
+        color_continuous_scale=px.colors.sequential.Viridis
+    )
+    fig_avg_weekday.update_layout(
+        title_font=dict(size=24),
+        xaxis_title_font=dict(size=18),
+        yaxis_title_font=dict(size=18),
+        legend=dict(title_font=dict(size=16), font=dict(size=14)),
+        width=1800, 
+        height=600
+    )
     st.plotly_chart(fig_avg_weekday)
 
 else:
