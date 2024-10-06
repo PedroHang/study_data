@@ -214,46 +214,70 @@ if not df.empty:
     )
     st.plotly_chart(fig_avg_weekday)
 
-
         # Function to fetch temperature data for a specific date
     def fetch_temperature(date, city='Petropolis'):
-        API_KEY = 'ab4845d200d3ee44bfe80c69b2d20b7f'  # You'll need to replace this with your actual API key
+        API_KEY = 'your_api_key_here'  # You'll need to replace this with your actual API key
         BASE_URL = f"http://api.openweathermap.org/data/2.5/onecall/timemachine"
         LAT, LON = -22.5149, -43.1779  # Coordinates for Petrópolis
 
         # API call to fetch weather for the specific date
+        timestamp = int(pd.Timestamp(date).timestamp())
         response = requests.get(
-            f"{BASE_URL}?lat={LAT}&lon={LON}&dt={int(pd.Timestamp(date).timestamp())}&appid={API_KEY}&units=metric"
+            f"{BASE_URL}?lat={LAT}&lon={LON}&dt={timestamp}&appid={API_KEY}&units=metric"
         )
 
-        if response.status_code == 200:
-            data = response.json()
-            # Get the average temperature for that day
-            temps = [hourly['temp'] for hourly in data['hourly']]
-            avg_temp = sum(temps) / len(temps)
-            return avg_temp
-        else:
+        # Debug the response
+        if response.status_code != 200:
+            st.error(f"Failed to fetch temperature data: {response.status_code}")
             return None
+
+        data = response.json()
+
+        if 'hourly' not in data:
+            st.error("No hourly data found in the API response.")
+            return None
+
+        # Get the average temperature for that day
+        temps = [hourly['temp'] for hourly in data['hourly']]
+        avg_temp = sum(temps) / len(temps)
+        return avg_temp
 
     # Fetch study data
     data = fetch_data()  # Assuming this fetches your study data
     df = pd.DataFrame(data)
 
+    # Ensure there is data in the DataFrame
+    if df.empty:
+        st.error("The study data is empty.")
+    else:
+        st.write("Study data loaded successfully:", df.head())
+
     # Add temperature data to each date in the study dataset
     df['Full_Date'] = pd.to_datetime(df['Full_Date'])
     df['Avg_Temperature'] = df['Full_Date'].apply(fetch_temperature)
 
+    # Ensure temperature data was fetched correctly
+    if df['Avg_Temperature'].isnull().all():
+        st.error("No temperature data was fetched.")
+    else:
+        st.write("Temperature data added:", df[['Full_Date', 'Avg_Temperature']].head())
+
     # Group by temperature and calculate the average study hours
     df_grouped = df.groupby('Avg_Temperature')['Hours'].mean().reset_index()
 
-    # Create scatter plot to visualize correlation
-    fig = px.scatter(df_grouped, x='Avg_Temperature', y='Hours',
-                    title='Correlation Between Average Temperature and Study Hours',
-                    labels={'Avg_Temperature': 'Average Temperature (°C)', 'Hours': 'Average Study Hours'},
-                    trendline="ols")  # Add a trendline to observe the correlation
+    # Ensure there is data to plot
+    if df_grouped.empty:
+        st.error("No data to plot after grouping.")
+    else:
+        st.write("Grouped data for plotting:", df_grouped.head())
 
-    # Show the plot
-    st.plotly_chart(fig)
+        # Create scatter plot to visualize correlation
+        fig = px.scatter(df_grouped, x='Avg_Temperature', y='Hours',
+                        title='Correlation Between Average Temperature and Study Hours',
+                        labels={'Avg_Temperature': 'Average Temperature (°C)', 'Hours': 'Average Study Hours'},
+                        trendline="ols")  # Add a trendline to observe the correlation
 
+        # Show the plot
+        st.plotly_chart(fig)
 else:
     st.write("No data available.")
