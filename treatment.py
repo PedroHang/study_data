@@ -169,9 +169,14 @@ if not df.empty:
 
 
     ######################################
-    # Slider and Switch
+    
+        # Add a central title
+    st.markdown(f"<h3 style='text-align: center; font-size: 45px; margin-top: 60px;'>Insights</h3>", unsafe_allow_html=True)
+
+    # Input for custom "Last X Days" and date filter
     last_x_days = st.slider("Select the number of days for the recent period:", min_value=1, max_value=365, value=30)
     last_x_days_date = datetime.now() - timedelta(days=last_x_days)
+    st.markdown(f"<h3 style='font-size: 12px;'>Disclaimer: The Time of the Day started being recorded on 2024-10-05</h3>", unsafe_allow_html=True)
 
     # Switch for entire period or custom range
     date_filter = st.radio("Select Time Period", (f"Last {last_x_days} Days", "Entire Period"))
@@ -181,17 +186,14 @@ if not df.empty:
     else:
         df_filtered = df
 
-    # Title for Insights
-    st.markdown(f"<h3 style='text-align: center; font-size: 45px; margin-top: 60px;'>Insights</h3>", unsafe_allow_html=True)
-
     # Add a new column for the day of the week
-    df['Day_of_Week'] = df['Full_Date'].dt.day_name()  # Get the name of the day
+    df_filtered['Day_of_Week'] = df_filtered['Full_Date'].dt.day_name()
 
     # Calculate total hours for each day of the week
-    total_hours_per_weekday = df.groupby('Day_of_Week')['Hours'].sum().reset_index()
+    total_hours_per_weekday = df_filtered.groupby('Day_of_Week')['Hours'].sum().reset_index()
 
     # Calculate the number of unique study days for each day of the week
-    unique_days_per_weekday = df.groupby('Day_of_Week')['Full_Date'].nunique().reset_index()
+    unique_days_per_weekday = df_filtered.groupby('Day_of_Week')['Full_Date'].nunique().reset_index()
 
     # Merge the two DataFrames
     average_hours_per_weekday = pd.merge(total_hours_per_weekday, unique_days_per_weekday, on='Day_of_Week')
@@ -225,8 +227,11 @@ if not df.empty:
     )
     st.plotly_chart(fig_avg_weekday)
 
-    # Add a margin top of 40px before donut charts
+    # Add margin top for the donut charts
     st.markdown('<div style="margin-top: 40px;"></div>', unsafe_allow_html=True)
+
+    # Create columns for the two donut charts
+    col1, col2 = st.columns(2)
 
     # Centralized Title for both charts
     st.markdown(f"<h3 style='text-align: center; font-size: 30px; margin-top: 30px;'>Time of the Day Breakdown</h3>", unsafe_allow_html=True)
@@ -237,9 +242,6 @@ if not df.empty:
         "Afternoon": ["#198983", "#20B2AA", "#2ed9d0", "#53e0d8", "#8beae5"],  # Shades of Light Sea Green for Afternoon
         "Night": ["#6c19b9", "#8A2BE2", "#a45ae8", "#b981ee", "#d4b1f4"]  # Shades of Blue Violet for Night
     }
-
-    # Create columns for the two donut charts
-    col1, col2 = st.columns(2)
 
     # Content for col1
     with col1:
@@ -286,7 +288,7 @@ if not df.empty:
         # Display the donut chart
         st.plotly_chart(fig_tod)
 
-    # Content for col2 with margin top
+    # Content for col2
     with col2:
         # Switch for Morning, Afternoon, or Night
         tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
@@ -326,10 +328,8 @@ if not df.empty:
             height=550
         )
 
-        # Display the donut chart with a margin-top of 40px
+        # Display the donut chart
         st.plotly_chart(fig_subject)
-
-
 
 
 else:
