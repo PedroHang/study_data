@@ -253,8 +253,8 @@ if not df.empty:
 
         color_palettes = {
             "Morning": ["#ff7a44", "#FFA07A", "#ffc3ab", "#ffdcce", "#fff8f5"],  # Shades of Light Salmon for Morning
-            "Afternoon": ["#20C4AA", "#28D2B2", "#30DFBA"],  # Shades of Light Sea Green for Afternoon
-            "Night": ["#8A2BE2", "#7A22D0", "#6A1BBE"]  # Shades of Blue Violet for Night
+            "Afternoon": ["#198983", "#20B2AA", "#2ed9d0", "#53e0d8", "#8beae5"],  # Shades of Light Sea Green for Afternoon
+            "Night": ["#6c19b9", "#8A2BE2", "#a45ae8", "#b981ee", "#d4b1f4"]  # Shades of Blue Violet for Night
         }
 
         # Create a donut chart for subject distribution
