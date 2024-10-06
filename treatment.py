@@ -244,7 +244,8 @@ if not df.empty:
 
     # Content for col1
     with col1:
-
+        st.markdown("<h3 style='margin-top: 20px;'>Study Hours Distribution by Time of Day</h3>", unsafe_allow_html=True)  # Streamlit title with top margin
+        
         # Group by 'Tod' and sum the 'Hours'
         df_tod = df_filtered.groupby('Tod')['Hours'].sum().reset_index()
 
@@ -274,6 +275,7 @@ if not df.empty:
 
         # Update layout for the legend and labels
         fig_tod.update_layout(
+            margin=dict(t=30, l=10, r=10, b=10),  # Adjust margins
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -281,9 +283,6 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
-            title="Distribution of Study Hours by Time of Day",  # Add chart title
-            title_font=dict(size=25),  # Set title font size
-            title_x=0.1,  # Center the title
             width=650,
             height=550
         )
@@ -293,8 +292,8 @@ if not df.empty:
 
     # Content for col2
     with col2:
-        st.write("")  # Add an empty line for spacing
-
+        st.markdown("<h3 style='margin-top: 20px;'>Study Hours for Selected Time of Day</h3>", unsafe_allow_html=True)  # Streamlit title with top margin
+        
         # Radio button for selecting time of day
         tod_selected = st.radio("Select Time of Day", ["Morning", "Afternoon", "Night"])
 
@@ -322,6 +321,7 @@ if not df.empty:
 
         # Update layout for the legend and labels
         fig_subject.update_layout(
+            margin=dict(t=30, l=10, r=10, b=10),  # Adjust margins
             legend=dict(
                 font=dict(size=14),  # Increase legend font size
                 yanchor="top",
@@ -329,9 +329,6 @@ if not df.empty:
                 xanchor="right",
                 x=1.3
             ),
-            title=f"Study Hours for {tod_selected}",  # Add chart title for the selected time of day
-            title_font=dict(size=25),  # Set title font size
-            title_x=0.1,  # Center the title
             width=650,
             height=550
         )
