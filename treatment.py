@@ -54,7 +54,7 @@ if not df.empty:
         with col2:
             total_hours_today = df_today['Hours'].sum()
             st.markdown(f"<h3 style='text-align: center; font-size: 18px;'>Total Hours Studied Today</h3>", unsafe_allow_html=True)
-            st.markdown(f"<h1 style='text-align: center; font-size: 48px; color: orange; margin-top: 60px'>{total_hours_today:.2f} Hours</h1>", unsafe_allow_html=True)
+            st.markdown(f"<h1 style='text-align: center; font-size: 70px; color: orange; margin-top: 60px'>{total_hours_today:.2f} Hours</h1>", unsafe_allow_html=True)
 
     if not df_daily.empty:
         plot_option = st.selectbox("Select Plot Type:", ("Total Hours", "Rolling Volatility", "Weekly Average"))
