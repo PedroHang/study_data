@@ -7,17 +7,6 @@ from datetime import datetime, timedelta
 API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTVLP5IFZY9R2CTS4Ld9yFm9ymyAyTcW5IK_aVjmAqWPhrNmg5jWAzPgqd1ziVBqu3QEqL0Y4rpjF2/pub?output=csv"
 st.set_page_config(layout="wide")
 
-st.markdown(
-    """
-    <style>
-    .reportview-container {
-        background: url("https://img.freepik.com/free-vector/hand-drawn-back-school-background_23-2149464866.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1728172800&semt=ais_hybrid")
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 def fetch_data():
     try:
         # Read the Google Sheets CSV directly into a DataFrame
@@ -48,7 +37,8 @@ if not df.empty:
     df_weekly['Hours'] = df_weekly['Hours'].round(2)
 
     # Donut chart for today's study hours by subject
-    today = datetime.now().date()
+    today = datetime.now() - timedelta(hours=3)
+    today = today.date()
     df_today = df[df['Full_Date'].dt.date == today]
 
     if not df_today.empty:
